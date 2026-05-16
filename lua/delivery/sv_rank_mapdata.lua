@@ -1,0 +1,1 @@
+-- RANK_NPC_MAPDATA is now defined in sv_mapdata.lua

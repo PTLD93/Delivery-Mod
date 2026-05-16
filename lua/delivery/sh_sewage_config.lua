@@ -1,0 +1,31 @@
+SEWAGE_CONFIG = {
+    manholesPerJob         = 5,
+    litersPerManhole       = 2000,
+    fullPayout             = 20000,
+    collectRadius          = 350,
+    drainRadius            = 300,
+    tankerCapacity         = 10000,
+    tankerEmptyMass        = 800,
+    tankerFullMassPerLiter = 1.0,
+    fillRate               = 100,
+    emptyRate              = 200,
+    transferTick           = 0.1,
+}
+
+SEWAGE_MANHOLE_ADDRESSES = {
+    "Main St Sewer #1",
+    "Main St Sewer #2",
+    "Railway Ave Sewer #1",
+    "Railway Ave Sewer #2",
+	"River Rd Sewer Motel",
+    "River Rd Sewer #1",
+    "River Rd Sewer #2",
+    "Spruce Cres Sewer #1",
+    "Spruce Cres Sewer #2",
+    "Hwy 3 Sewer #1",
+    "Hwy 3 Sewer #2",
+    "Northern Steel Sewer",
+    "Metro Intl Sewer",
+    "Granite Hill Sewer",
+    "Beach Rd Sewer",
+}

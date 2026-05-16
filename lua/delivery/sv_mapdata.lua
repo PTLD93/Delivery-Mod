@@ -1,0 +1,137 @@
+DELIVERY_MAPDATA = {
+    ["rp_truenorth_v1a"] = {
+        { npc_key = "npc_oldman_diner", pos = Vector( 11746.98, 5057.63, 8.37 ), ang = Angle( 0.00, 180.39, 0.00 ) },
+        { npc_key = "npc_paperboy", pos = Vector( 7807.55, 4684.72, 8.83 ), ang = Angle( 0.00, 269.81, 0.00 ) },
+        { npc_key = "grocery_worker", pos = Vector( 15070.95, 9848.80, 8.34 ), ang = Angle( 0.00, 179.35, 0.00 ) },
+        { npc_key = "warehouse_manager", pos = Vector( 12720.58, -9839.96, 1.08 ), ang = Angle( 0.00, -90.00, 0.00 ) },
+        { npc_key = "scrapyard", pos = Vector( 13834.13, -3006.54, 2.47 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+        { npc_key = "mechanic", pos = Vector( 9207.99, 13661.33, 0.54 ), ang = Angle( 0.00, -180.00, 0.00 ) },
+        { npc_key = "lumberjack", pos = Vector( 2119.50, -11430.73, 4864.47 ), ang = Angle( 0.00, 176.48, 0.00 ) },
+        { npc_key = "sawmill_manager", pos = Vector( 10601.91, -14168.29, 64.89 ), ang = Angle( 0.00, 180.00, 0.00 ) },
+        { npc_key = "northern_steel_manager", pos = Vector( 12830.95, -5339.75, 0.43 ), ang = Angle( 0.00, 266.63, 0.00 ) },
+        { npc_key = "laker_swinger", pos = Vector( 12738.97, -11314.36, 5325.31 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+        { npc_key = "officer_cockson", pos = Vector( 2582.58, 3625.73, 8.12 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+        { npc_key = "wallace_bank", pos = Vector( 7075.06, 2964.99, 8.66 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+        { npc_key = "farmer", pos = Vector( -5325.31, -14555.88, 1.15 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+        { npc_key = "guy", pos = Vector( -3518.19, 9629.45, 136.44 ), ang = Angle( 0.00, 224.87, 0.00 ) },
+        { npc_key = "miner", pos = Vector( 10147.81, -6032.92, 5382.73 ), ang = Angle( 0.00, 270.86, 0.00 ) },
+        { npc_key = "construction_site_manager", pos = Vector( -9166.60, -15105.19, 4096.42 ), ang = Angle( 0.00, 356.84, 0.00 ) },
+    },
+}
+
+RANK_NPC_MAPDATA = {
+    ["rp_truenorth_v1a"] = {
+        { pos = Vector( 9282.85, 4677.56, 8.42 ), ang = Angle( 0.00, 223.12, 0.00 ) },
+    },
+}
+
+EXPRESS_NPC_MAPDATA = {
+    ["rp_truenorth_v1a"] = {
+        { pos = Vector( 13805.55, -1616.51, 0.17 ), ang = Angle( 0.00, 179.99, 0.00 ) },
+    },
+}
+
+TANKER_NPC_MAPDATA = TANKER_NPC_MAPDATA or {
+    ["rp_truenorth_v1a"] = {
+    },
+}
+
+EXPRESS_DROPOFF_MAPDATA = {
+    ["rp_truenorth_v1a"] = {
+        { address = "2 River Rd",               pos = Vector( -5415.99, 13704.03, 139.03 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "4 River Rd",               pos = Vector( -5287.79, 12392.76, 138.05 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "6 River Rd",               pos = Vector( -5479.77,  9688.14, 139.61 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "8 River Rd",               pos = Vector( -5464.01,  8024.77, 137.89 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "10 River Rd #1",           pos = Vector(  5095.97,  6547.65,   9.77 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "10 River Rd #2",           pos = Vector(  5096.00,  6908.18,  10.21 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "10 River Rd #3",           pos = Vector(  5095.91,  7268.07,   9.78 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "10 River Rd #4",           pos = Vector(  5095.68,  7628.03,   9.76 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "10 River Rd #5",           pos = Vector(  5095.99,  7988.27,   9.76 ), ang = Angle( 0.00, -180.00, 0.00 ) },
+        { address = "10 River Rd #6",           pos = Vector(  5095.67,  8348.08,   9.78 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "10 River Rd #7",           pos = Vector(  5095.96,  8708.57,   9.81 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "10 River Rd #8",           pos = Vector(  5095.99,  9068.17,   9.83 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "1 Spruce Cres",            pos = Vector( -3239.99, 13735.94, 138.03 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "3 Spruce Cres",            pos = Vector( -3288.15, 12151.99, 139.45 ), ang = Angle( 0.00, -180.00, 0.00 ) },
+        { address = "5 Spruce Cres",            pos = Vector( -3288.01,  9624.17, 137.82 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "7 Spruce Cres",            pos = Vector( -3224.01,  8231.88, 138.87 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "2 Spruce Cres",            pos = Vector(  -295.99,  8072.13, 140.25 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "4 Spruce Cres",            pos = Vector(  -344.01,  9240.83, 137.83 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "6 Spruce Cres",            pos = Vector(  -359.71, 10832.01, 138.77 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "8 Spruce Cres",            pos = Vector(  -295.99, 13416.79, 137.90 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "Mountainside Auto Sales",  pos = Vector(  6680.19, 13640.52,   1.87 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "Blu Cinema",               pos = Vector(  4199.95, 11176.01, 138.10 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "Mexigrill",                pos = Vector(  6712.17, 10006.51,   9.88 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "Kappels",                  pos = Vector(  8674.62,  9575.93,   9.85 ), ang = Angle( 0.00,  -90.00, 0.00 ) },
+        { address = "Main Street Grocery",      pos = Vector( 14695.99,  9768.25,   9.78 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "Mels Diner",               pos = Vector(  9032.87,  2456.01,   9.86 ), ang = Angle( 0.00,   90.00, 0.00 ) },
+        { address = "Chads Autobody",           pos = Vector(  9319.54, 13915.20,   1.80 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "4 Railway Ave",            pos = Vector( 11752.02,  3816.52,   9.76 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "6 Railway Ave",            pos = Vector( 11751.97,  3863.70,   9.78 ), ang = Angle( 0.00,  180.18, 0.00 ) },
+        { address = "8 Railway Ave",            pos = Vector( 11751.80,  6503.23,   9.76 ), ang = Angle( 0.00, -180.00, 0.00 ) },
+        { address = "10 Railway Ave",           pos = Vector( 11751.93,  6549.60,   9.82 ), ang = Angle( 0.00, -180.00, 0.00 ) },
+        { address = "12 Railway Ave",           pos = Vector( 10264.01,  7832.36,   9.77 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "14 Railway Ave",           pos = Vector( 10264.15,  7785.42,   9.78 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "16 Railway Ave",           pos = Vector( 10264.01,  5144.47,   9.78 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "18 Railway Ave",           pos = Vector( 10264.09,  5097.34,   9.76 ), ang = Angle( 0.00,    0.00, 0.00 ) },
+        { address = "Northern Steel",           pos = Vector( 13511.88,  -6126.08,  1.75 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "Metro Intl.",              pos = Vector( 12650.11,  -9864.12,  1.78 ), ang = Angle( 0.00,  -90.00, 0.00 ) },
+        { address = "2 Hwy 3",                 pos = Vector(  9380.25,  -5590.33,  2.22 ), ang = Angle( 0.00,  -90.00, 0.00 ) },
+        { address = "6 Hwy 3",                 pos = Vector(  5216.93, -10238.79,  1.87 ), ang = Angle( 0.00,   90.00, 0.00 ) },
+        { address = "10 Hwy 3",                pos = Vector(  1589.51,  -3962.37,  1.83 ), ang = Angle( 0.00,   90.00, 0.00 ) },
+		{ address = "6 Granite Lake Rd",        pos = Vector( 14314.79, -10370.87, 5377.80 ), ang = Angle( 0.00,   0.00, 0.00 ) },
+        { address = "9 Granite Lake Rd",        pos = Vector( 14361.73, -11930.21, 5378.27 ), ang = Angle( 0.00,   0.00, 0.00 ) },
+        { address = "3 Beach Rd",               pos = Vector(  6741.24, -11090.37, 5377.79 ), ang = Angle( 0.00, -180.00, 0.00 ) },
+        { address = "8 Beach Rd",               pos = Vector(  7576.26,  -7878.66, 5377.76 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "3 E Slide Rd",             pos = Vector( 15024.05,   5272.01, 6433.79 ), ang = Angle( 0.00,   90.00, 0.00 ) },
+        { address = "4 Pine Dr",                pos = Vector(  2021.75, -11790.27, 4866.42 ), ang = Angle( 0.00, -180.00, 0.00 ) },
+        { address = "2 Granite Hill Rd",        pos = Vector( -1794.36,  -9468.08, 4464.07 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+        { address = "3 Valley Dr",              pos = Vector(    90.66,  -3166.02, 4355.28 ), ang = Angle( 0.00, -180.00, 0.00 ) },
+        { address = "6 Valley Dr",              pos = Vector( 11875.44,   9420.12, 5331.95 ), ang = Angle( 0.00,  180.00, 0.00 ) },
+    },
+}
+
+SEWAGE_MANHOLE_MAPDATA = {
+    ["rp_truenorth_v1a"] = {
+        { address = "Main St Sewer #1", pos = Vector( 8075.29, 2914.64, 1.91 ), ang = Angle( 0.00, -90.00, 0.00 ) },
+		{ address = "Main St Sewer #2", pos = Vector( 7990.70, 9296.30, 1.79 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ address = "Railway Ave Sewer #1", pos = Vector( 11006.06, 4571.61, 1.76 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ address = "Railway Ave Sewer #2", pos = Vector( 11005.55, 7670.09, 1.80 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ address = "River Rd Sewer #1", pos = Vector( -4361.51, 13630.77, 129.79 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ address = "River Rd Sewer #2", pos = Vector( -4352.34, 8317.87, 129.90 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ address = "Spruce Cres Sewer #1", pos = Vector( 773.38, 9579.47, 130.39 ), ang = Angle( 0.00, 180.00, 0.00 ) },
+		{ address = "Spruce Cres Sewer #2", pos = Vector( 772.10, 12852.10, 130.01 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+		{ address = "Hwy 3 Sewer #1", pos = Vector( 5632.55, -5117.53, 1.81 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+		{ address = "Hwy 3 Sewer #2", pos = Vector( -2816.56, -4859.63, 1.75 ), ang = Angle( 0.00, -45.00, 0.00 ) },
+		{ address = "Northern Steel Sewer", pos = Vector( 12570.37, -4832.25, 1.94 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+		{ address = "Granite Hill Sewer", pos = Vector( -3546.12, -6601.95, 4101.23 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ address = "Beach Rd Sewer", pos = Vector( 7018.26, -9985.93, 5378.01 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ address = "Metro Intl Sewer", pos = Vector( 12497.42, -10548.10, 1.95 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+		{ address = "River Rd Sewer Motel", pos = Vector( 4467.31, 8827.42, 4.15 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+    },
+	["gm_flatgrass"] = {
+		{ address = "Main St Sewer #1", pos = Vector( 90.43, 1982.84, -12797.97 ), ang = Angle( 0.00, -178.54, 0.00 ) },
+		{ address = "Main St Sewer #2", pos = Vector( 86.84, 2124.19, -12797.97 ), ang = Angle( 0.00, -178.54, 0.00 ) },
+		{ address = "Railway Ave Sewer #1", pos = Vector( 83.49, 2255.93, -12797.97 ), ang = Angle( 0.00, -178.54, 0.00 ) },
+		{ address = "Railway Ave Sewer #2", pos = Vector( 80.38, 2378.08, -12797.97 ), ang = Angle( 0.00, -178.54, 0.00 ) },
+		{ address = "River Rd Sewer #1", pos = Vector( 77.46, 2493.04, -12797.97 ), ang = Angle( 0.00, -178.54, 0.00 ) },
+	},
+}
+
+SEWAGE_DROPOFF_MAPDATA = {
+    ["rp_truenorth_v1a"] = {
+        { pos = Vector( -11414.52, -15456.43, 1.84 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+    },
+	["gm_flatgrass"] = {
+		{ pos = Vector( 96.01, 1834.65, -12794.97 ), ang = Angle( 0.00, 1.72, 0.00 ) },
+	},
+}
+
+SEWAGE_NPC_MAPDATA = {
+    ["rp_truenorth_v1a"] = {
+        { pos = Vector( -11350.21, -15291.84, 0.83 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+    },
+	["gm_flatgrass"] = {
+		{ pos = Vector( 523.48, 2076.15, -12798.38 ), ang = Angle( 0.00, 180, 0.00 ) },
+	},
+
+}
