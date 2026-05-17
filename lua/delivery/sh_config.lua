@@ -49,10 +49,18 @@ DELIVERY_CARGO = {
 		--allowedTeam = "TEAM_HEAVY_DUTY",
         --requires = { item = "ores", ratio = 3 },
     },
+	["large_tubes"] = {
+        label       = "Large Tubes",
+        model       = "models/cargo/large_tubes.mdl",
+        mass        = 19812,
+        limit       = 2,
+		--allowedTeam = "TEAM_HEAVY_DUTY",
+        --requires = { item = "ores", ratio = 3 },
+    },
     ["logs_pile_small"] = {
         label       = "Pile Of Logs Small",
         model       = "models/cargo/logs_medium_duty.mdl",
-        mass        = 1580,
+        mass        = 7500,
         limit       = 4,
 		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_LIGHT_DUTY" },
         --requires = { item = "barrel", ratio = 1 },
@@ -63,7 +71,7 @@ DELIVERY_CARGO = {
 	["logs_pile"] = {
         label       = "Pile Of Logs",
         model       = "models/cargo/logs_heavy_duty.mdl",
-        mass        = 3080,
+        mass        = 15000,
         limit       = 4,
 		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_HEAVY_DUTY" },
         --requires = { item = "barrel", ratio = 2 },
@@ -74,7 +82,7 @@ DELIVERY_CARGO = {
 	["logs_pile_large"] = {
         label       = "Pile Of Logs Large",
         model       = "models/cargo/logs_heavy_duty_large.mdl",
-        mass        = 6800,
+        mass        = 30000,
         limit       = 2,
 		--allowedTeam = "TEAM_HEAVY_DUTY",
         --requires = { item = "barrel", ratio = 4 },
@@ -85,7 +93,7 @@ DELIVERY_CARGO = {
     ["wooden_beams_small"] = {
         label       = "Wooden Beams Small",
         model       = "models/cargo/timber_beams_medium_duty.mdl",
-        mass        = 1580,
+        mass        = 5390,
         limit       = 4,
 		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_LIGHT_DUTY" },
         --requires = { item = "logs_pile_small", ratio = 2 },
@@ -93,7 +101,7 @@ DELIVERY_CARGO = {
 	["wooden_beams"] = {
         label       = "Wooden Beams",
         model       = "models/cargo/timber_beams_heavy_duty.mdl",
-        mass        = 3080,
+        mass        = 12320,
         limit       = 4,
 		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_HEAVY_DUTY" },
         --requires = { item = "logs_pile", ratio = 2 },
@@ -101,11 +109,52 @@ DELIVERY_CARGO = {
 	["wooden_beams_large"] = {
         label       = "Wooden Beams Large",
         model       = "models/cargo/timber_beams_heavy_duty_large.mdl",
-        mass        = 6800,
+        mass        = 19250,
         limit       = 2,
 		--allowedTeam = "TEAM_HEAVY_DUTY",
         --requires = { item = "logs_pile_large", ratio = 2 },
         
+    },
+	["wooden_beams_single"] = {
+        label       = "Wooden Beams Single Stack",
+        model       = "models/cargo/timber_beams_light_duty.mdl",
+        mass        = 385,
+        limit       = 30,
+		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_LIGHT_DUTY" },
+        --requires = { item = "logs_pile", ratio = 2 },
+    },
+	["plywood_small"] = {
+        label       = "Plywood Small",
+        model       = "models/cargo/plywood_medium_duty.mdl",
+        mass        = 5600,
+        limit       = 4,
+		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_LIGHT_DUTY" },
+        --requires = { item = "logs_pile_small", ratio = 2 },
+    },
+	["plywood"] = {
+        label       = "Plywood",
+        model       = "models/cargo/plywood_heavy_duty.mdl",
+        mass        = 8400,
+        limit       = 4,
+		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_HEAVY_DUTY" },
+        --requires = { item = "logs_pile", ratio = 2 },
+    },
+	["plywood_large"] = {
+        label       = "Plywood Large",
+        model       = "models/cargo/plywood_heavy_duty_large.mdl",
+        mass        = 12600,
+        limit       = 2,
+		--allowedTeam = "TEAM_HEAVY_DUTY",
+        --requires = { item = "logs_pile_large", ratio = 2 },
+        
+    },
+	["plywood_single"] = {
+        label       = "Plywood Single Stack",
+        model       = "models/cargo/plywood_light_duty.mdl",
+        mass        = 1400,
+        limit       = 20,
+		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_LIGHT_DUTY" },
+        --requires = { item = "logs_pile_small", ratio = 2 },
     },
 	["ammo_box"] = {
         label       = "Ammo box",
@@ -256,6 +305,62 @@ DELIVERY_CARGO = {
 			{ model = "models/props_lab/filecabinet02.mdl",                     mass = 50,  price = 75  },
         },
     },
+	["log_small"] = {
+        label = "Log Small",
+        limit = 20,
+        --allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_LIGHT_DUTY" },
+        models = {
+            { model = "models/cargo/logs_medium_duty_2.mdl", mass = 500, price = 200 },
+			{ model = "models/cargo/logs_medium_duty_3.mdl", mass = 500, price = 200 },
+			{ model = "models/cargo/logs_medium_duty_4.mdl", mass = 500, price = 200 },
+			{ model = "models/cargo/logs_medium_duty_5.mdl", mass = 500, price = 200 },
+			{ model = "models/cargo/logs_medium_duty_6.mdl", mass = 500, price = 200 },
+			{ model = "models/cargo/logs_medium_duty_7.mdl", mass = 500, price = 200 },
+            
+        --requires = { item = "barrel", ratio = 1 },
+        --produces = {
+            --{ item = "wooden_beams_small", ratio = 2 },
+        --},
+        },
+    },
+	["log"] = {
+        label = "Log",
+        limit = 20,
+        --allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_HEAVY_DUTY" },
+        models = {
+            { model = "models/cargo/logs_heavy_duty_1.mdl", mass = 1000, price = 433 },
+			{ model = "models/cargo/logs_heavy_duty_2.mdl", mass = 1000, price = 433 },
+			{ model = "models/cargo/logs_heavy_duty_3.mdl", mass = 1000, price = 433 },
+			{ model = "models/cargo/logs_heavy_duty_4.mdl", mass = 1000, price = 433 },
+			{ model = "models/cargo/logs_heavy_duty_5.mdl", mass = 1000, price = 433 },
+			{ model = "models/cargo/logs_heavy_duty_6.mdl", mass = 1000, price = 433 },
+			{ model = "models/cargo/logs_heavy_duty_7.mdl", mass = 1000, price = 433 },
+            
+        --requires = { item = "barrel", ratio = 1 },
+        --produces = {
+            --{ item = "wooden_beams_small", ratio = 2 },
+        --},
+        },
+    },
+	["log_large"] = {
+        label = "Log Large",
+        limit = 20,
+        --allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_HEAVY_DUTY" },
+        models = {
+            { model = "models/cargo/logs_heavy_duty_large_1.mdl", mass = 2000, price = 933 },
+			{ model = "models/cargo/logs_heavy_duty_large_2.mdl", mass = 2000, price = 933 },
+			{ model = "models/cargo/logs_heavy_duty_large_3.mdl", mass = 2000, price = 933 },
+			{ model = "models/cargo/logs_heavy_duty_large_4.mdl", mass = 2000, price = 933 },
+			{ model = "models/cargo/logs_heavy_duty_large_5.mdl", mass = 2000, price = 933 },
+			{ model = "models/cargo/logs_heavy_duty_large_6.mdl", mass = 2000, price = 933 },
+			{ model = "models/cargo/logs_heavy_duty_large_7.mdl", mass = 2000, price = 933 },
+            
+        --requires = { item = "barrel", ratio = 1 },
+        --produces = {
+            --{ item = "wooden_beams_small", ratio = 2 },
+        --},
+        },
+    },
 }
 
 DELIVERY_NPCS = {
@@ -265,7 +370,7 @@ DELIVERY_NPCS = {
         spawnOffset = Vector( 0, 20, 20 ),
         sells = {
             { item = "news_paper",  label = "News Paper",   price = 1  },
-            { item = "pills",  label = "Illegal Pills",   price = 10  },
+            { item = "pills",  label = "Illegal Pills",   price = 40  },
         },
         buys = {
         },
@@ -285,10 +390,10 @@ DELIVERY_NPCS = {
         model = "models/humans/group01/male_04.mdl",
         spawnOffset = Vector( 0, 50, 50 ),
         sells = {
-            { item = "fertilizers",  label = "Fertilizers",   price = 100 },
+            { item = "fertilizers",  label = "Fertilizers",   price = 150 },
         },
         buys = {
-			{ item = "small_food_goods",  label = "Small Grocery Products",   price = 35 },
+			{ item = "small_food_goods",   label = "Small Grocery Products",   price = 35 },
             { item = "big_food_goods",    label = "Big Grocery Products",     price = 275 },
         },
     },
@@ -297,8 +402,8 @@ DELIVERY_NPCS = {
         model = "models/humans/group01/male_04.mdl",
         spawnOffset = Vector( 0, -50, 50 ),
         sells = {
-            { item = "small_food_goods",  label = "Small Grocery Products",   price = 35  },
-            { item = "big_food_goods",    label = "Big Grocery Products",     price = 275 },
+            { item = "small_food_goods",  label = "Small Grocery Products",   price = 50  },
+            { item = "big_food_goods",    label = "Big Grocery Products",     price = 140 },
 			{ item = "furniture",         label = "Furniture",                price = 75  },
 			{ item = "ammo_box",          label = "Ammo Box",                 price = 100 },
 			{ item = "barrel",            label = "Barrel",                   price = 25  },
@@ -327,10 +432,10 @@ DELIVERY_NPCS = {
         spawnOffset = Vector( 250, 0, 100 ),
         sells = {
 			{ item = "tires",     label = "Tires",     price = 80   },
-			{ item = "car_scrap", label = "Car Scrap", price = 300  },
-            { item = "small_car", label = "Small Car", price = 300  },
-            { item = "big_car",   label = "Big Car",   price = 1500 },
-			{ item = "boat",      label = "Boat",      price = 1000 },
+			{ item = "car_scrap", label = "Car Scrap", price = 175  },
+            { item = "small_car", label = "Small Car", price = 450  },
+            { item = "big_car",   label = "Big Car",   price = 1100 },
+			{ item = "boat",       label = "Boat",      price = 550 },
         },
         buys = {
             { item = "pills",  label = "Illegal Pills",   price = 100  },
@@ -341,9 +446,12 @@ DELIVERY_NPCS = {
         model = "models/humans/group01/male_04.mdl",
         spawnOffset = Vector( -50, 650, 100 ),
         sells = {
-            { item = "logs_pile",       label = "Pile Of Logs",       price = 1600 },
-            { item = "logs_pile_large", label = "Pile Of Logs Large", price = 2950 },
             { item = "logs_pile_small", label = "Pile Of Logs Small", price = 1200 },
+			{ item = "logs_pile",       label = "Pile Of Logs",       price = 2500 },
+			{ item = "logs_pile_large", label = "Pile Of Logs Large", price = 5000 },
+			{ item = "log_small", 				   label = "Log Small", price = 80 },
+			{ item = "log", 					 		label = "Log", price = 166 },
+			{ item = "log_large", 				  label = "Log Large", price = 333 },
         },
         buys = {
             { item = "barrel",     label = "Barrel",     price = 150  },
@@ -354,14 +462,22 @@ DELIVERY_NPCS = {
         model = "models/humans/group01/male_04.mdl",
         spawnOffset = Vector( 300, 650, 0 ),
         sells = {
-            { item = "wooden_beams",       label = "Wooden Beams",       price = 2500  },
-            { item = "wooden_beams_large", label = "Wooden Beams Large", price = 5000 },
-            { item = "wooden_beams_small", label = "Wooden Beams Small", price = 500 },
+            { item = "wooden_beams_small", 		  label = "Wooden Beams Small", price = 1000 },
+			{ item = "wooden_beams",       		  label = "Wooden Beams",       price = 3500 },
+			{ item = "wooden_beams_large", 		  label = "Wooden Beams Large", price = 7000 },
+			{ item = "wooden_beams_single", label = "Wooden Beams Single Stack", price = 140 },
+			{ item = "plywood_small", 			  	   label = "Plywood Small", price = 1500 },
+			{ item = "plywood",       			  	   label = "Plywood",       price = 4000 },
+			{ item = "plywood_large", 			  	   label = "Plywood Large", price = 8000 },
+			{ item = "plywood_single", 			 label = "Plywood Single Stack", price = 888 },
         },
         buys = {
-			{ item = "logs_pile",       label = "Pile Of Logs",       price = 5000  },
-            { item = "logs_pile_large", label = "Pile Of Logs Large", price = 12000 },
-            { item = "logs_pile_small", label = "Pile Of Logs Small", price = 3000 },
+			{ item = "logs_pile_small",  label = "Pile Of Logs Small", price = 3000 },
+			{ item = "logs_pile",        label = "Pile Of Logs",       price = 6500 },
+			{ item = "logs_pile_large", label = "Pile Of Logs Large", price = 14000 },
+			{ item = "log_small", 				   label = "Log Small", price = 200 },
+			{ item = "log", 							 label = "Log", price = 433 },
+			{ item = "log_large", 				   label = "Log Large", price = 933 },
         },
     },
 	["northern_steel_manager"] = {
@@ -369,7 +485,8 @@ DELIVERY_NPCS = {
         model = "models/humans/group01/male_04.mdl",
         spawnOffset = Vector( 150, 0, 100 ),
         sells = {
-            { item = "iron_pipes", label = "Iron Pipes", price = 3900 },
+            { item = "iron_pipes",   label = "Iron Pipes", price = 4500 },
+			{ item = "large_tubes", label = "Large Tubes", price = 6500 },
         },
         buys = {
             { item = "ores", label = "Random Ores", price = 675 },
@@ -382,10 +499,16 @@ DELIVERY_NPCS = {
         sells = {
         },
         buys = {
-			{ item = "iron_pipes", label = "Iron Pipes", price = 11000 },
-            { item = "wooden_beams",       label = "Wooden Beams",       price = 5000  },
-            { item = "wooden_beams_large", label = "Wooden Beams Large", price = 7500 },
-            { item = "wooden_beams_small", label = "Wooden Beams Small", price = 2500 },
+			{ item = "iron_pipes", 						 label = "Iron Pipes", price = 12000 },
+			{ item = "large_tubes", 					label = "Large Tubes", price = 18000 },
+            { item = "wooden_beams_small", 		  label = "Wooden Beams Small", price = 3000 },
+			{ item = "wooden_beams",       		  label = "Wooden Beams",       price = 8500 },
+			{ item = "wooden_beams_large", 		 label = "Wooden Beams Large", price = 15000 },
+			{ item = "wooden_beams_single", label = "Wooden Beams Single Stack", price = 300 },
+			{ item = "plywood_small", 				   label = "Plywood Small", price = 3500 },
+			{ item = "plywood",       				   label = "Plywood",       price = 9500 },
+			{ item = "plywood_large", 				  label = "Plywood Large", price = 15000 },
+			{ item = "plywood_single", 			label = "Plywood Single Stack", price = 1666 },
         },
     },
 	["laker_swinger"] = {
