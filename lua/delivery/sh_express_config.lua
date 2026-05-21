@@ -8,6 +8,57 @@ EXPRESS_CONFIG = {
     deliverRadius  = 180,
 }
 
+EXPRESS_VARIANTS = {
+    {
+        name = "Mini Van",
+        minPackages = 6,
+        maxPackages = 15,
+        threshold = 10,
+        minModels = 1,
+        maxModels = 7,
+        minSalary = 6000,
+        maxSalary = 8500,
+        minTime = 1500, -- 25 mins
+        maxTime = 1800, -- 30 mins
+    },
+    {
+        name = "Panel Van Small",
+        minPackages = 6,
+        maxPackages = 20,
+        threshold = 11,
+        minModels = 1,
+        maxModels = 10,
+        minSalary = 9000,
+        maxSalary = 14000,
+        minTime = 1500, -- 25 mins
+        maxTime = 2100, -- 35 mins
+    },
+    {
+        name = "Panel Van Large",
+        minPackages = 10,
+        maxPackages = 30,
+        threshold = 15,
+        minModels = 1,
+        maxModels = 10,
+        minSalary = 9500,
+        maxSalary = 17000,
+        minTime = 1800, -- 30 mins
+        maxTime = 2400, -- 40 mins
+    },
+    {
+        name = "Box Van",
+        minPackages = 15,
+        maxPackages = 40,
+        threshold = 25,
+        minModels = 5,
+        maxModels = 10,
+        minSalary = 10000,
+        maxSalary = 20000,
+        minTime = 2100, -- 35 mins
+        maxTime = 3000, -- 50 mins
+    },
+}
+
 EXPRESS_ADDRESSES = {
     -- Main St
     "1 Main St",

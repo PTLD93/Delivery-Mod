@@ -12,13 +12,12 @@ local function ClearJob(ply)
     EXPRESS_ACTIVE_JOBS[ply:SteamID()] = nil
 end
 
-local function CalcPayout(delivered, total)
+local function CalcPayout(delivered, total, potentialPayout)
     if total <= 0 or delivered <= 0 then return 0 end
-    local baseSalary = total >= 11 and EXPRESS_CONFIG.maxPayout or (EXPRESS_CONFIG.maxPayout / 2)
-    return math.floor((delivered / total) * baseSalary / 10) * 10
+    return math.floor((delivered / total) * (potentialPayout or 0) / 10) * 10
 end
 
-local function SpawnPackages(ply, npcEnt, count)
+local function SpawnPackages(ply, npcEnt, count, minModel, maxModel)
     local packages = {}
 
     local allDropoffs = {}
@@ -60,14 +59,17 @@ local function SpawnPackages(ply, npcEnt, count)
         end
 
         local available = {}
-        for idx, entry in ipairs(EXPRESS_BOX_MODELS) do
-            if modelCounts[idx] < entry.limit then
+        for idx = minModel, maxModel do
+            local entry = EXPRESS_BOX_MODELS[idx]
+            if entry and modelCounts[idx] < entry.limit then
                 available[#available + 1] = idx
             end
         end
         if #available == 0 then
-            for idx = 1, #EXPRESS_BOX_MODELS do
-                available[#available + 1] = idx
+            for idx = minModel, maxModel do
+                if EXPRESS_BOX_MODELS[idx] then
+                    available[#available + 1] = idx
+                end
             end
         end
         local chosenIdx = available[math.random(#available)]
@@ -138,7 +140,7 @@ local function FinishJob(ply, forceTurnIn)
 
     local delivered = job.delivered
     local total     = job.total
-    local payout    = CalcPayout(delivered, total)
+    local payout    = CalcPayout(delivered, total, job.potentialPayout)
 
     for _, idx in ipairs(job.packages) do
         local ent = ents.GetByIndex(idx)
@@ -167,10 +169,17 @@ net.Receive("Express_StartJob", function(len, ply)
     end
 
     local npcEntIdx = net.ReadInt(16)
+    local variantIdx = net.ReadInt(4)
     local npcEnt    = ents.GetByIndex(npcEntIdx)
 
     if not IsValid(npcEnt) or npcEnt:GetClass() ~= "sent_express_npc" then
         ply:ChatPrint("[Express] Invalid NPC.")
+        return
+    end
+
+    local variant = EXPRESS_VARIANTS[variantIdx]
+    if not variant then
+        ply:ChatPrint("[Express] Invalid delivery option.")
         return
     end
 
@@ -179,18 +188,23 @@ net.Receive("Express_StartJob", function(len, ply)
         return
     end
 
-    local count     = math.random(EXPRESS_CONFIG.minPackages, EXPRESS_CONFIG.maxPackages)
-    local packages  = SpawnPackages(ply, npcEnt, count)
-    local timeLimit = count >= 11 and EXPRESS_CONFIG.timeLimitLarge or EXPRESS_CONFIG.timeLimitSmall
+    local count     = math.random(variant.minPackages, variant.maxPackages)
+    local packages  = SpawnPackages(ply, npcEnt, count, variant.minModels, variant.maxModels)
+    
+    -- Threshold logic for payout and time limit
+    local potentialPayout = (count >= variant.threshold) and variant.maxSalary or variant.minSalary
+    local timeLimit       = (count >= variant.threshold) and variant.maxTime or variant.minTime
 
     local job = {
-        total      = count,
-        delivered  = 0,
-        startTime  = CurTime(),
-        npcEntIdx  = npcEntIdx,
-        packages   = packages,
-        expired    = false,
-        timeLimit  = timeLimit,
+        total           = count,
+        delivered       = 0,
+        startTime       = CurTime(),
+        npcEntIdx       = npcEntIdx,
+        packages        = packages,
+        expired         = false,
+        timeLimit       = timeLimit,
+        potentialPayout = potentialPayout,
+        variantName     = variant.name,
     }
     SetJob(ply, job)
 

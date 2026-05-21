@@ -6,7 +6,7 @@ local function OpenExpressMenu(npcIdx, hasJob, jobTotal, jobDelivered)
     local frame = vgui.Create("DFrame")
     EXPRESS_MENU_FRAME = frame
     frame:SetTitle("Express Delivery")
-    frame:SetSize(380, hasJob and 280 or 240)
+    frame:SetSize(400, hasJob and 280 or 480)
     frame:Center()
     frame:MakePopup()
 
@@ -16,30 +16,41 @@ local function OpenExpressMenu(npcIdx, hasJob, jobTotal, jobDelivered)
     inner:SetBackgroundColor(Color(35, 35, 38, 255))
 
     if not hasJob then
-        local desc = vgui.Create("DLabel", inner)
-        local minPayout = EXPRESS_CONFIG.maxPayout / 2
-        desc:SetText("Pick up a batch of 6–20 packages and deliver them\nto the correct addresses across the map.\n\n6–10 packages: up to $" .. minPayout .. " | 11–20 packages: up to $" .. EXPRESS_CONFIG.maxPayout .. "\nTime limit: 35 minutes")
+        local scroll = vgui.Create("DScrollPanel", inner)
+        scroll:Dock(FILL)
+
+        local desc = vgui.Create("DLabel", scroll)
+        desc:SetText("Select a delivery vehicle type to start. Each has different package limits and pay ranges based on the amount of packages assigned.")
         desc:SetTextColor(Color(200, 200, 200))
         desc:SetFont("DermaDefault")
         desc:Dock(TOP)
         desc:DockMargin(0, 6, 0, 16)
-        desc:SetTall(72)
+        desc:SetTall(40)
         desc:SetWrap(true)
         desc:SetAutoStretchVertical(true)
 
-        local btn = vgui.Create("DButton", inner)
-        btn:SetText("Start Delivery")
-        btn:SetTall(44)
-        btn:Dock(TOP)
-        btn:SetTextColor(Color(255, 255, 255))
-        btn.Paint = function(s, w, h)
-            draw.RoundedBox(8, 0, 0, w, h, s:IsHovered() and Color(40, 160, 60) or Color(50, 200, 80))
-        end
-        btn.DoClick = function()
-            net.Start("Express_StartJob")
-                net.WriteInt(npcIdx, 16)
-            net.SendToServer()
-            frame:Remove()
+        for i, v in ipairs(EXPRESS_VARIANTS) do
+            local btn = vgui.Create("DButton", scroll)
+            btn:SetTall(60)
+            btn:Dock(TOP)
+            btn:DockMargin(0, 0, 0, 8)
+            btn:SetText("")
+            btn.Paint = function(s, w, h)
+                local col = s:IsHovered() and Color(60, 60, 65) or Color(45, 45, 48)
+                draw.RoundedBox(8, 0, 0, w, h, col)
+                
+                draw.SimpleText(v.name, "DermaDefaultBold", 12, 10, Color(255, 255, 255))
+                draw.SimpleText("Salary: $" .. (v.minSalary / 1000) .. "k – $" .. (v.maxSalary / 1000) .. "k", "DermaDefault", 12, 26, Color(100, 220, 100))
+                draw.SimpleText("Packages: " .. v.minPackages .. " – " .. v.maxPackages, "DermaDefault", 12, 42, Color(180, 180, 180))
+                draw.SimpleText("Time: " .. math.floor(v.minTime / 60) .. " – " .. math.floor(v.maxTime / 60) .. " mins", "DermaDefault", w - 12, h / 2, Color(200, 200, 200), TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+            end
+            btn.DoClick = function()
+                net.Start("Express_StartJob")
+                    net.WriteInt(npcIdx, 16)
+                    net.WriteInt(i, 4) -- Send variant index
+                net.SendToServer()
+                frame:Remove()
+            end
         end
     else
         local progress = vgui.Create("DLabel", inner)
