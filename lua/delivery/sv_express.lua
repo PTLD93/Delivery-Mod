@@ -20,26 +20,19 @@ end
 local function SpawnPackages(ply, npcEnt, count, minModel, maxModel)
     local packages = {}
 
-    local allDropoffs = {}
+    local validDropoffAddresses = {}
     for _, ent in ipairs(ents.FindByClass("sent_express_dropoff")) do
         if IsValid(ent) then
-            allDropoffs[#allDropoffs + 1] = ent:GetNWString("DropoffAddress", "")
-        end
-    end
-
-    local availableAddresses = {}
-    for _, addr in ipairs(EXPRESS_ADDRESSES) do
-        for _, da in ipairs(allDropoffs) do
-            if da == addr then
-                availableAddresses[#availableAddresses + 1] = addr
-                break
+            local addr = ent:GetNWString("DropoffAddress", "")
+            if addr ~= "" then
+                validDropoffAddresses[#validDropoffAddresses + 1] = addr
             end
         end
     end
 
-    if #availableAddresses == 0 then
-        availableAddresses = table.Copy(EXPRESS_ADDRESSES)
-    end
+    -- If no dropoffs exist on map, use the config list as fallback (though jobs won't be deliverable)
+    local pool = #validDropoffAddresses > 0 and table.Copy(validDropoffAddresses) or table.Copy(EXPRESS_ADDRESSES)
+    local currentPool = table.Copy(pool)
 
     local spawnBase = IsValid(npcEnt) and npcEnt:GetPos() or ply:GetPos()
 
@@ -50,13 +43,13 @@ local function SpawnPackages(ply, npcEnt, count, minModel, maxModel)
 
     for i = 1, count do
         local addr
-        if #availableAddresses > 0 then
-            local idx = math.random(#availableAddresses)
-            addr = availableAddresses[idx]
-            table.remove(availableAddresses, idx)
-        else
-            addr = EXPRESS_ADDRESSES[math.random(#EXPRESS_ADDRESSES)]
+        if #currentPool == 0 then
+            currentPool = table.Copy(pool)
         end
+        
+        local idx = math.random(#currentPool)
+        addr = currentPool[idx]
+        table.remove(currentPool, idx)
 
         local available = {}
         for idx = minModel, maxModel do

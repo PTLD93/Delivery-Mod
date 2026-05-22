@@ -16,6 +16,7 @@ EXPRESS_VARIANTS = {
         threshold = 10,
         minModels = 1,
         maxModels = 7,
+        sizeDesc = "Small to Medium",
         minSalary = 6000,
         maxSalary = 8500,
         minTime = 1500, -- 25 mins
@@ -25,9 +26,10 @@ EXPRESS_VARIANTS = {
         name = "Panel Van Small",
         minPackages = 6,
         maxPackages = 20,
-        threshold = 11,
+        threshold = 13,
         minModels = 1,
         maxModels = 10,
+        sizeDesc = "Small to Large",
         minSalary = 9000,
         maxSalary = 14000,
         minTime = 1500, -- 25 mins
@@ -37,9 +39,10 @@ EXPRESS_VARIANTS = {
         name = "Panel Van Large",
         minPackages = 10,
         maxPackages = 30,
-        threshold = 15,
+        threshold = 20,
         minModels = 1,
         maxModels = 10,
+        sizeDesc = "Small to Large",
         minSalary = 9500,
         maxSalary = 17000,
         minTime = 1800, -- 30 mins
@@ -48,10 +51,11 @@ EXPRESS_VARIANTS = {
     {
         name = "Box Van",
         minPackages = 15,
-        maxPackages = 40,
+        maxPackages = 35,
         threshold = 25,
         minModels = 5,
         maxModels = 10,
+        sizeDesc = "Medium to Large",
         minSalary = 10000,
         maxSalary = 20000,
         minTime = 2100, -- 35 mins
@@ -60,6 +64,9 @@ EXPRESS_VARIANTS = {
 }
 
 EXPRESS_ADDRESSES = {
+
+--True North
+
     -- Main St
     "1 Main St",
     "5 Main St",
@@ -130,6 +137,38 @@ EXPRESS_ADDRESSES = {
     "Richardson Hauling",
     "Northern Steel",
     "Metro Intl.",
+	
+--New Exton V2
+
+	--Newexton
+	"Newexton Bestfield Ladidas",
+	"Newexton Bestfield Voolworths",
+	"Newexton Bestfield Hardly Normal",
+	"Newexton Bestfield Brooks Book Books",
+	"Newexton Bestfield Cinema",
+	"Newexton Permanent",
+	"Newexton DAB",
+	"Newexton Service NSW",
+	"Newexton VP Gas Station",
+	"Newexton Hospital",
+	"Newexton Exton Motors",
+	"Newexton Bobs Customs",
+	"Newexton Ej Hooker",
+	
+	--MT Meatloaf
+	"MT Meatloaf Punnings Warehouse",
+	
+	--Woogong
+	"Woogong IGAR",
+	"Woogong Toothes New",
+	"Woogong Dragway",
+	"Woogong Church",
+	"Woogong Autoparts",
+	
+	--Sunshine HWY
+	"Power Plant",
+	"The Large Banana",
+	"Obamas Fried Chicken",
 }
 
 EXPRESS_BOX_MODELS = {

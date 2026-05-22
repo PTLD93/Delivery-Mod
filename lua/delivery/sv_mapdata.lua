@@ -29,6 +29,9 @@ EXPRESS_NPC_MAPDATA = {
     ["rp_truenorth_v1a"] = {
         { pos = Vector( 13805.55, -1616.51, 0.17 ), ang = Angle( 0.00, 179.99, 0.00 ) },
     },
+	["rp_newexton2_v5h"] = {
+        { pos = Vector( -6112.24, -11845.21, -519.97 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+    },
 }
 
 TANKER_NPC_MAPDATA = TANKER_NPC_MAPDATA or {
@@ -88,6 +91,31 @@ EXPRESS_DROPOFF_MAPDATA = {
         { address = "3 Valley Dr",              pos = Vector(    90.66,  -3166.02, 4355.28 ), ang = Angle( 0.00, -180.00, 0.00 ) },
         { address = "6 Valley Dr",              pos = Vector( 11875.44,   9420.12, 5331.95 ), ang = Angle( 0.00,  180.00, 0.00 ) },
     },
+	
+	["rp_newexton2_v5h"] = {
+		{ address = "Newexton Bestfield Ladidas", pos = Vector(-7633.27, 4615.99, 1025.79), ang = Angle(0.00, 0.00, 0.00) },
+		{ address = "Newexton Bestfield Voolworths", pos = Vector(-6236.83, 4608.34, 1026.28), ang = Angle(0.00, -180.00, 0.00) },
+		{ address = "Newexton Bestfield Hardly Normal", pos = Vector(-7087.63, 2458.85, 1298.07), ang = Angle(0.00, 90.00, 0.00) },
+		{ address = "Newexton Bestfield Brooks Book Books", pos = Vector(-6052.59, 2926.75, 1298.23), ang = Angle(0.00, 180.00, 0.00) },
+		{ address = "Newexton Bestfield Cinema", pos = Vector(-5912.01, 4324.72, 1297.88), ang = Angle(0.00, -180.00, 0.00) },
+		{ address = "Newexton Permanent", pos = Vector(-8908.03, -2215.99, 1540.56), ang = Angle(0.00, 90.00, 0.00) },
+		{ address = "Newexton DAB", pos = Vector(-10643.42, 935.94, 1538.51), ang = Angle(0.00, -90.00, 0.00) },
+		{ address = "Newexton Service NSW", pos = Vector(-13615.70, 3288.69, 1329.88), ang = Angle(0.00, 0.00, 0.00) },
+		{ address = "Newexton VP Gas Station", pos = Vector(4152.98, 6272.04, 1025.75), ang = Angle(0.00, 90.00, 0.00) },
+		{ address = "Newexton Hospital", pos = Vector(6375.99, 6048.94, 1026.05), ang = Angle(0.00, -180.00, 0.00) },
+		{ address = "Newexton Exton Motors", pos = Vector(-6651.72, -5525.66, 1017.84), ang = Angle(0.00, 260.08, 0.00) },
+		{ address = "Newexton Bobs Customs", pos = Vector(-5577.47, -6040.40, 1017.79), ang = Angle(0.00, -90.00, 0.00) },
+		{ address = "Newexton Ej Hooker", pos = Vector(-9912.85, 4057.05, 1025.77), ang = Angle(0.00, 0.00, 0.00) },
+		{ address = "Obamas Fried Chicken", pos = Vector(-9514.64, -14742.20, 1025.82), ang = Angle(0.00, 180.00, 0.00) },
+		{ address = "MT Meatloaf Punnings Warehouse", pos = Vector(-532.61, -12563.59, 1028.49), ang = Angle(0.00, -180.00, 0.00) },
+		{ address = "Power Plant", pos = Vector(2282.53, 4638.63, 1.80), ang = Angle(0.00, -90.00, 0.00) },
+		{ address = "The Large Banana", pos = Vector(13720.50, -7389.80, 465.79), ang = Angle(0.00, 0.00, 0.00) },
+		{ address = "Woogong IGAR", pos = Vector(-5847.44, -9415.74, -510.04), ang = Angle(0.00, 0.00, 0.00) },
+		{ address = "Woogong Toothes New", pos = Vector(-3880.07, -8729.38, -510.17), ang = Angle(0.00, 180.00, 0.00) },
+		{ address = "Woogong Dragway", pos = Vector(-9898.29, 5829.28, -517.91), ang = Angle(0.00, 0.00, 0.00) },
+		{ address = "Woogong Autoparts", pos = Vector(-6396.56, -8615.70, -510.17), ang = Angle(0.00, 90.00, 0.00) },
+		{ address = "Woogong Church", pos = Vector(-4352.01, 1501.96, -502.01), ang = Angle(0.00, 180.00, 0.00) },
+	},
 }
 
 SEWAGE_MANHOLE_MAPDATA = {
@@ -115,6 +143,28 @@ SEWAGE_MANHOLE_MAPDATA = {
 		{ address = "Railway Ave Sewer #2", pos = Vector( 80.38, 2378.08, -12797.97 ), ang = Angle( 0.00, -178.54, 0.00 ) },
 		{ address = "River Rd Sewer #1", pos = Vector( 77.46, 2493.04, -12797.97 ), ang = Angle( 0.00, -178.54, 0.00 ) },
 	},
+	["rp_newexton2_v5h"] = {
+		{ address = "Newexton #1", pos = Vector( -8954.53, 6913.81, 1017.82 ), ang = Angle( 0.00, -90.09, 0.00 ) },
+		{ address = "Newexton #2", pos = Vector( -4799.37, 6909.67, 1018.03 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ address = "Newexton #3", pos = Vector( -4801.38, -257.50, 1529.83 ), ang = Angle( 0.00, -90.00, 0.00 ) },
+		{ address = "Newexton #4", pos = Vector( 2428.45, -257.09, 1018.03 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ address = "Newexton #5", pos = Vector( 2432.37, 3715.61, 1017.97 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+		{ address = "Newexton #6", pos = Vector( 12558.77, 3460.39, 1018.03 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ address = "Newexton #7", pos = Vector( 9749.13, 3461.14, 1018.03 ), ang = Angle( 0.00, -90.00, 0.00 ) },
+		{ address = "Newexton #8", pos = Vector( -9627.32, 13678.16, 1017.78 ), ang = Angle( 0.00, 180.00, 0.00 ) },
+		{ address = "Exton motors", pos = Vector( -4601.52, -6367.75, 1018.03 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ address = "Obamas Fried Chicken", pos = Vector( -8545.97, -14497.50, 1018.03 ), ang = Angle( 0.00, -90.00, 0.00 ) },
+		{ address = "Newexton #9", pos = Vector( -9962.31, 1268.58, 1026.43 ), ang = Angle( 0.00, -180.00, 0.00 ) },
+		{ address = "Newexton #10", pos = Vector( 5028.32, 9859.88, 1530.03 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+		{ address = "Punnings Warehouse", pos = Vector( -1993.94, -10856.98, 1017.82 ), ang = Angle( 0.00, -90.00, 0.00 ) },
+		{ address = "Sunshine HWY #1", pos = Vector( 10118.05, -9108.94, 507.66 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+		{ address = "The Large Banana", pos = Vector( 13429.26, -8582.13, 458.45 ), ang = Angle( 0.00, 180.00, 0.00 ) },
+		{ address = "Dockyard", pos = Vector( 14319.57, 12104.56, -5.57 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ address = "Woogong #1", pos = Vector( -4872.35, -12243.97, -518.12 ), ang = Angle( 0.00, -90.00, 0.00 ) },
+		{ address = "Woogong #2", pos = Vector( -1651.93, -9732.14, -516.49 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ address = "Woogong #3", pos = Vector( -7924.32, 105.25, -518.00 ), ang = Angle( 0.00, -90.00, 0.00 ) },
+	},
+
 }
 
 SEWAGE_DROPOFF_MAPDATA = {
@@ -124,6 +174,9 @@ SEWAGE_DROPOFF_MAPDATA = {
 	["gm_flatgrass"] = {
 		{ pos = Vector( 96.01, 1834.65, -12794.97 ), ang = Angle( 0.00, 1.72, 0.00 ) },
 	},
+	["rp_newexton2_v5h"] = {
+		{ pos = Vector( 511.63, 4040.25, -6.12 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+	},
 }
 
 SEWAGE_NPC_MAPDATA = {
@@ -132,6 +185,9 @@ SEWAGE_NPC_MAPDATA = {
     },
 	["gm_flatgrass"] = {
 		{ pos = Vector( 523.48, 2076.15, -12798.38 ), ang = Angle( 0.00, 180, 0.00 ) },
+	},
+	["rp_newexton2_v5h"] = {
+		{ pos = Vector( 1083.83, 4391.52, -7.85 ), ang = Angle( 0.00, -90.00, 0.00 ) },
 	},
 
 }

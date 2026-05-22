@@ -41,7 +41,7 @@ local function OpenExpressMenu(npcIdx, hasJob, jobTotal, jobDelivered)
                 
                 draw.SimpleText(v.name, "DermaDefaultBold", 12, 10, Color(255, 255, 255))
                 draw.SimpleText("Salary: $" .. (v.minSalary / 1000) .. "k – $" .. (v.maxSalary / 1000) .. "k", "DermaDefault", 12, 26, Color(100, 220, 100))
-                draw.SimpleText("Packages: " .. v.minPackages .. " – " .. v.maxPackages, "DermaDefault", 12, 42, Color(180, 180, 180))
+                draw.SimpleText("Packages: " .. v.minPackages .. " – " .. v.maxPackages .. " (" .. (v.sizeDesc or "Mixed") .. ")", "DermaDefault", 12, 42, Color(180, 180, 180))
                 draw.SimpleText("Time: " .. math.floor(v.minTime / 60) .. " – " .. math.floor(v.maxTime / 60) .. " mins", "DermaDefault", w - 12, h / 2, Color(200, 200, 200), TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
             end
             btn.DoClick = function()

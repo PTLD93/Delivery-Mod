@@ -13,6 +13,8 @@ SEWAGE_CONFIG = {
 }
 
 SEWAGE_MANHOLE_ADDRESSES = {
+
+	--Truenorth
     "Main St Sewer #1",
     "Main St Sewer #2",
     "Railway Ave Sewer #1",
@@ -28,4 +30,31 @@ SEWAGE_MANHOLE_ADDRESSES = {
     "Metro Intl Sewer",
     "Granite Hill Sewer",
     "Beach Rd Sewer",
+	
+	--New Exton V2
+	"Newexton #1",
+	"Newexton #2",
+	"Newexton #3",
+	"Newexton #4",
+	"Newexton #5",
+	"Newexton #6",
+	"Newexton #7",
+	"Newexton #8",
+	"Newexton #9",
+	"Newexton #10",
+	"Exton motors",
+	
+	--MT Meatloaf
+	"Punnings Warehouse",
+	
+	--Sunshine HWY
+	"Obamas Fried Chicken",
+	"Sunshine HWY #1",
+	"The Large Banana",
+	"Dockyard",
+	
+	--Woogong
+	"Woogong #1",
+	"Woogong #2",
+	"Woogong #3",
 }
