@@ -574,13 +574,13 @@ DELIVERY_NPCS = {
     },
 }
 
-DELIVERY_ALLOWED_TEAMS = {
-    "TEAM_SMALL_PICKUP",
-    "TEAM_LARGE_PICKUP",
-    "TEAM_LIGHT_DUTY",
-    "TEAM_MEDIUM_DUTY",
-    "TEAM_HEAVY_DUTY",
-}
+--DELIVERY_ALLOWED_TEAMS = {
+--    "TEAM_SMALL_PICKUP",
+--    "TEAM_LARGE_PICKUP",
+--    "TEAM_LIGHT_DUTY",
+--    "TEAM_MEDIUM_DUTY",
+--    "TEAM_HEAVY_DUTY",
+--}
 
 function Delivery_IsAllowedJob(ply)
     local team = ply:Team()

@@ -24,10 +24,10 @@ net.Receive("DeliveryNPC_Buy", function(len, ply)
     local npcData = DELIVERY_NPCS[npcKey]
     if not npcData then return end
 
-    if not Delivery_IsAllowedJob(ply) and not ply:IsAdmin() then
-        ply:ChatPrint("[Delivery] You must be a delivery worker to buy cargo.")
-        return
-    end
+    --if not Delivery_IsAllowedJob(ply) and not ply:IsAdmin() then
+    --    ply:ChatPrint("[Delivery] You must be a delivery worker to buy cargo.")
+    --    return
+    --end
 
     if not Delivery_CanBuyCargo(ply, item) then
         ply:ChatPrint("[Delivery] Your current job cannot purchase this cargo.")
