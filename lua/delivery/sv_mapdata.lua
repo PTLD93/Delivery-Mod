@@ -14,7 +14,7 @@ DELIVERY_MAPDATA = {
         { npc_key = "wallace_bank", pos = Vector( 7075.06, 2964.99, 8.66 ), ang = Angle( 0.00, 90.00, 0.00 ) },
         { npc_key = "farmer", pos = Vector( -5325.31, -14555.88, 1.15 ), ang = Angle( 0.00, 0.00, 0.00 ) },
         { npc_key = "guy", pos = Vector( -3518.19, 9629.45, 136.44 ), ang = Angle( 0.00, 224.87, 0.00 ) },
-        { npc_key = "miner", pos = Vector( 10147.81, -6032.92, 5382.73 ), ang = Angle( 0.00, 270.86, 0.00 ) },
+        { npc_key = "miner", pos = Vector( 10203.84, -7360.87, 5376.00 ), ang = Angle( 0.00, 90.00, 0.00 ), spawnOffset = Vector(-155.02, -123.734, 292.69) },
         { npc_key = "construction_site_manager", pos = Vector( -9166.60, -15105.19, 4096.42 ), ang = Angle( 0.00, 356.84, 0.00 ) },
     },
 }

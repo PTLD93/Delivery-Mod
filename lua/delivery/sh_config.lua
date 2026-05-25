@@ -180,8 +180,8 @@ DELIVERY_CARGO = {
     ["ores"] = {
         label       = "Random Ores",
         model       = "models/props_wasteland/rockgranite03c.mdl",
-        mass        = 250,
-        limit       = 10,
+        mass        = 800,
+        limit       = 40,
 		--allowedTeams = { "TEAM_LIGHT_DUTY", "TEAM_LARGE_PICKUP" },
         --produces = {
             --{ item = "iron_pipes", ratio = 3 },
@@ -489,7 +489,7 @@ DELIVERY_NPCS = {
 			{ item = "large_tubes", label = "Large Tubes", price = 6500 },
         },
         buys = {
-            { item = "ores", label = "Random Ores", price = 675 },
+            { item = "ores", label = "Random Ores", price = 1100 },
         },
     },
 	["construction_site_manager"] = {
@@ -567,7 +567,7 @@ DELIVERY_NPCS = {
         model = "models/humans/group01/male_07.mdl",
         spawnOffset = Vector( 0, 75, 20 ),
         sells = {
-            { item = "ores", label = "Random Ores", price = 250 },
+            { item = "ores", label = "Random Ores", price = 350 },
         },
         buys = {
         },
