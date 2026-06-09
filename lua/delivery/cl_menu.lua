@@ -36,13 +36,23 @@ local function FormatRequirementText(req, separator)
     return table.concat(parts, separator or ", ")
 end
 
-local function BuildCargoInfoText(cargoEntry, priceValue)
+local function BuildCargoInfoText(cargoEntry, priceValue, overrideLiters)
     local priceStr = priceValue > 0 and ("$" .. priceValue) or ""
     if Delivery_IsLiquidCargo and Delivery_IsLiquidCargo(cargoEntry) then
-        local liters = Delivery_GetLiquidLiters(cargoEntry)
-        local tons = Delivery_FormatTonsFromKg(Delivery_GetLiquidMassKg(cargoEntry))
+        local liters = overrideLiters or Delivery_GetLiquidLiters(cargoEntry)
+        local density = Delivery_GetLiquidDensity(cargoEntry)
+        local tons = Delivery_FormatTonsFromKg(liters * density)
         local liquidText = Delivery_FormatLiters(liters) .. " L  •  " .. tons .. " tons"
         return priceStr ~= "" and (priceStr .. "  •  " .. liquidText) or liquidText
+    end
+
+    if Delivery_IsGrainCargo and Delivery_IsGrainCargo(cargoEntry) then
+        local liters = overrideLiters or Delivery_GetGrainLiters(cargoEntry)
+        local density = Delivery_GetGrainDensity(cargoEntry)
+        local tons = Delivery_FormatTonsFromKg(liters * density)
+        local m3 = math.Round(liters / 1000, 2)
+        local grainText = Delivery_FormatLiters(liters) .. " L (" .. m3 .. " m³)  •  " .. tons .. " tons"
+        return priceStr ~= "" and (priceStr .. "  •  " .. grainText) or grainText
     end
 
     local massText = ""
@@ -200,17 +210,48 @@ local function OpenDeliveryMenu(npcKey, npcPos)
 
         local cargoEntry = DELIVERY_CARGO and DELIVERY_CARGO[itemData.item]
         local isLiquid = Delivery_IsLiquidCargo and Delivery_IsLiquidCargo(cargoEntry)
+        local isGrain  = Delivery_IsGrainCargo and Delivery_IsGrainCargo(cargoEntry)
         local model = cargoEntry and (cargoEntry.model or (cargoEntry.models and cargoEntry.models[1] and cargoEntry.models[1].model))
-        local textX = isLiquid and 12 or 62
+        local textX = (isLiquid or isGrain) and 12 or 62
+
+        local price = nil -- Pre-declare for slider callback usage
+        local slider = nil
+        if isGrain and btnLabel == "Buy" and not locked then
+            row:SetTall(100)
+            slider = vgui.Create("DNumSlider", row)
+            slider:SetPos(textX, 55)
+            slider:SetSize(row:GetWide() - textX - 110, 40)
+            slider:SetText("Amount (Liters)")
+            slider:SetMin(DELIVERY_GRAIN_CONFIG.minCapacityLiters)
+            slider:SetMax(DELIVERY_GRAIN_CONFIG.maxCapacityLiters)
+            slider:SetDecimals(0)
+            slider:SetValue(Delivery_GetGrainLiters(cargoEntry))
+            slider:SetDark(false)
+
+            slider.OnValueChanged = function(s, val)
+                local basePrice = itemData.price
+                local baseLiters = Delivery_GetGrainLiters(cargoEntry)
+                local newPrice = math.ceil((val / baseLiters) * basePrice)
+                
+                -- Update the price label if we can find it
+                if IsValid(price) then
+                    price:SetText(BuildCargoInfoText(cargoEntry, newPrice, val))
+                end
+            end
+
+            row.OnSizeChanged = function(s, w, h)
+                slider:SetWide(w - textX - 110)
+            end
+        end
 
         local icon
-        if not isLiquid and model then
+        if not isLiquid and not isGrain and model then
             icon = vgui.Create("SpawnIcon", row)
             icon:SetSize(44, 44)
             icon:SetPos(8, 8)
             icon:SetModel(model)
             icon:SetMouseInputEnabled(false)
-        elseif not isLiquid then
+        elseif not isLiquid and not isGrain then
             icon = vgui.Create("DPanel", row)
             icon:SetSize(44, 44)
             icon:SetPos(8, 8)
@@ -242,17 +283,17 @@ local function OpenDeliveryMenu(npcKey, npcPos)
             end
         end
 
-        local priceStr = itemData.price > 0 and ("$" .. itemData.price) or ""
-        local infoStr  = priceStr ~= "" and massText ~= "" and (priceStr .. "  •  " .. massText)
-                      or (priceStr ~= "" and priceStr or massText)
+        local sellPriceStr = itemData.price > 0 and ("$" .. itemData.price) or ""
+        local infoStr  = sellPriceStr ~= "" and massText ~= "" and (sellPriceStr .. "  •  " .. massText)
+                      or (sellPriceStr ~= "" and sellPriceStr or massText)
 
-        local price = vgui.Create("DLabel", row)
+        price = vgui.Create("DLabel", row)
         price:SetText(infoStr)
         price:SetFont("DermaDefaultBold")
         price:SetTextColor(locked and Color(80, 100, 80) or Color(100, 220, 100))
         price:SetPos(textX, 32)
         price:SetSize(250, 20)
-        if isLiquid then
+        if isLiquid or isGrain then
             price:SetText(BuildCargoInfoText(cargoEntry, itemData.price))
         end
 
@@ -289,7 +330,13 @@ local function OpenDeliveryMenu(npcKey, npcPos)
             end
             draw.RoundedBox(6, 0, 0, w, h, col)
         end
-        btn.DoClick = onClick
+        btn.DoClick = function()
+            if slider then
+                onClick(math.Round(slider:GetValue()))
+            else
+                onClick()
+            end
+        end
 
         row.PerformLayout = function(s)
             btn:SetPos(s:GetWide() - 96, 10)
@@ -356,12 +403,15 @@ local function OpenDeliveryMenu(npcKey, npcPos)
                 end
             end
 
-            MakeItemRow(buyScroll, itemData, "Buy", Color(50, 130, 200), function()
+            MakeItemRow(buyScroll, itemData, "Buy", Color(50, 130, 200), function(amt)
                 if locked then return end
                 net.Start("DeliveryNPC_Buy")
                     net.WriteString(npcKey)
                     net.WriteString(localItemData.item)
                     net.WriteVector(npcPos)
+                    if amt then
+                        net.WriteUInt(amt, 32)
+                    end
                 net.SendToServer()
             end, locked, lockReason)
         end
@@ -395,16 +445,31 @@ local function OpenDeliveryMenu(npcKey, npcPos)
             local displayLabel = itemData.label
             local displayPrice = itemData.price
             local nearbyCount  = 0
+            local currentTotalLiters = nil
             local cargoEntry = DELIVERY_CARGO and DELIVERY_CARGO[itemData.item]
             local isLiquid = Delivery_IsLiquidCargo and Delivery_IsLiquidCargo(cargoEntry)
+            local isGrain  = Delivery_IsGrainCargo and Delivery_IsGrainCargo(cargoEntry)
 
             if isLiquid then
                 local tanker = Delivery_GetNearbyOwnedTankerCL and Delivery_GetNearbyOwnedTankerCL(npcPos, itemData.item)
                 if IsValid(tanker) then
                     nearbyCount = 1
-                    displayLabel = itemData.label .. "  [" .. Delivery_FormatLiters(tanker:GetNWInt("DeliveryTankerLiquidLiters", 0)) .. " L loaded]"
+                    currentTotalLiters = tanker:GetNWInt("DeliveryTankerLiquidLiters", 0)
+                    displayLabel = itemData.label .. "  [" .. Delivery_FormatLiters(currentTotalLiters) .. " L loaded]"
                 else
                     displayLabel = itemData.label .. "  [no filled tanker nearby]"
+                end
+            elseif isGrain then
+                local grainBeds = Delivery_GetNearbyOwnedGrainBedsCL and Delivery_GetNearbyOwnedGrainBedsCL(npcPos, itemData.item) or {}
+                if #grainBeds > 0 then
+                    nearbyCount = #grainBeds
+                    currentTotalLiters = 0
+                    for _, bed in ipairs(grainBeds) do
+                        currentTotalLiters = currentTotalLiters + bed:GetNWInt("DeliveryGrainBedLiters", 0)
+                    end
+                    displayLabel = itemData.label .. "  [" .. Delivery_FormatLiters(currentTotalLiters) .. " L loaded in " .. nearbyCount .. " bed(s)]"
+                else
+                    displayLabel = itemData.label .. "  [no filled grain bed(s) nearby]"
                 end
             elseif itemData.item == "sent_fish" then
                 for _, ent in ipairs(ents.GetAll()) do
@@ -438,16 +503,16 @@ local function OpenDeliveryMenu(npcKey, npcPos)
             row:SetBackgroundColor(canSell and Color(50, 50, 55, 255) or Color(35, 35, 38, 255))
 
             local model = cargoEntry and (cargoEntry.model or (cargoEntry.models and cargoEntry.models[1] and cargoEntry.models[1].model))
-            local textX = isLiquid and 12 or 62
+            local textX = (isLiquid or isGrain) and 12 or 62
 
             local icon
-            if not isLiquid and model then
+            if not isLiquid and not isGrain and model then
                 icon = vgui.Create("SpawnIcon", row)
                 icon:SetSize(44, 44)
                 icon:SetPos(8, 8)
                 icon:SetModel(model)
                 icon:SetMouseInputEnabled(false)
-            elseif not isLiquid then
+            elseif not isLiquid and not isGrain then
                 icon = vgui.Create("DPanel", row)
                 icon:SetSize(44, 44)
                 icon:SetPos(8, 8)
@@ -455,7 +520,7 @@ local function OpenDeliveryMenu(npcKey, npcPos)
             end
 
             local name = vgui.Create("DLabel", row)
-            local countStr = not isLiquid and (nearbyCount > 0 and ("  [" .. nearbyCount .. "x nearby]") or "  [none nearby]") or ""
+            local countStr = not isLiquid and not isGrain and (nearbyCount > 0 and ("  [" .. nearbyCount .. "x nearby]") or "  [none nearby]") or ""
             name:SetText(displayLabel .. countStr)
             name:SetFont("DermaDefaultBold")
             name:SetTextColor(canSell and Color(255, 255, 255) or Color(120, 120, 120))
@@ -490,8 +555,8 @@ local function OpenDeliveryMenu(npcKey, npcPos)
             price:SetTextColor(canSell and Color(100, 220, 100) or Color(80, 110, 80))
             price:SetPos(textX, 32)
             price:SetSize(250, 20)
-            if isLiquid then
-                price:SetText(BuildCargoInfoText(cargoEntry, displayPrice))
+            if isLiquid or isGrain then
+                price:SetText(BuildCargoInfoText(cargoEntry, displayPrice, currentTotalLiters))
             end
 
             local btn = vgui.Create("DButton", row)
@@ -525,4 +590,13 @@ net.Receive("DeliveryNPC_OpenMenu", function()
     local npcKey  = net.ReadString()
     local npcPos  = net.ReadVector()
     OpenDeliveryMenu(npcKey, npcPos)
+end)
+
+net.Receive("Delivery_RefreshConfig", function()
+    include("delivery/sh_config.lua")
+    include("delivery/sh_tanker_config.lua")
+    include("delivery/sh_tanker_job_config.lua")
+    include("delivery/sh_grain_config.lua")
+    include("delivery/sh_grain_job_config.lua")
+    print("[Delivery] Client-side configuration refreshed.")
 end)

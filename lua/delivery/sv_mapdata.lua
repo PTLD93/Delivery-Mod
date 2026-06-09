@@ -16,6 +16,8 @@ DELIVERY_MAPDATA = {
         { npc_key = "guy", pos = Vector( -3518.19, 9629.45, 136.44 ), ang = Angle( 0.00, 224.87, 0.00 ) },
         { npc_key = "miner", pos = Vector( 10203.84, -7360.87, 5376.00 ), ang = Angle( 0.00, 90.00, 0.00 ), spawnOffset = Vector(-155.02, -123.734, 292.69) },
         { npc_key = "construction_site_manager", pos = Vector( -9166.60, -15105.19, 4096.42 ), ang = Angle( 0.00, 356.84, 0.00 ) },
+		{ npc_key = "grain_factory", pos = Vector( -5763.40, -14793.28, 32.29 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+        { npc_key = "grain_farm", pos = Vector( -261.64, -3362.12, 4361.32 ), ang = Angle( 0.00, 0.00, 0.00 ) },
     },
 }
 

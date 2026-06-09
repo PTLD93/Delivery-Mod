@@ -21,6 +21,12 @@ net.Receive("DeliveryNPC_Buy", function(len, ply)
     local npcKey  = net.ReadString()
     local item    = net.ReadString()
     local npcPos  = net.ReadVector()
+    local cargoEntry = DELIVERY_CARGO[item]
+    local requestedLiters = nil
+    if cargoEntry and Delivery_IsGrainCargo and Delivery_IsGrainCargo(cargoEntry) then
+        requestedLiters = net.ReadUInt(32)
+    end
+
     local npcData = DELIVERY_NPCS[npcKey]
     if not npcData then return end
 
@@ -106,6 +112,27 @@ net.Receive("DeliveryNPC_Buy", function(len, ply)
 
     if Delivery_IsLiquidCargo(DELIVERY_CARGO[item]) then
         local ok, msg = Delivery_StartTankerTransfer(ply, npcPos, item, "fill", itemData.price)
+        if not ok then
+            ply:ChatPrint("[Delivery] " .. msg)
+            return
+        end
+
+        ply:ChatPrint("[Delivery] " .. msg)
+        return
+    end
+
+    if Delivery_IsGrainCargo and Delivery_IsGrainCargo(DELIVERY_CARGO[item]) then
+        local basePrice = itemData.price
+        local baseLiters = Delivery_GetGrainLiters(DELIVERY_CARGO[item])
+        local finalPrice = basePrice
+        local finalLiters = baseLiters
+
+        if requestedLiters and requestedLiters > 0 and baseLiters > 0 then
+            finalLiters = requestedLiters
+            finalPrice = math.ceil((requestedLiters / baseLiters) * basePrice)
+        end
+
+        local ok, msg = Delivery_StartGrainTransfer(ply, npcPos, item, "fill", finalPrice, finalLiters)
         if not ok then
             ply:ChatPrint("[Delivery] " .. msg)
             return
@@ -224,6 +251,17 @@ net.Receive("DeliveryNPC_Sell", function(len, ply)
         end
 
         ply:ChatPrint("[Delivery] " .. tankerOrMsg)
+        return
+    end
+
+    if Delivery_IsGrainCargo and Delivery_IsGrainCargo(DELIVERY_CARGO[item]) then
+        local ok, msg = Delivery_StartGrainTransfer(ply, IsValid(npcEnt) and npcEnt:GetPos() or nil, item, "drain", itemData.price)
+        if not ok then
+            ply:ChatPrint("[Delivery] " .. msg)
+            return
+        end
+
+        ply:ChatPrint("[Delivery] " .. msg)
         return
     end
 

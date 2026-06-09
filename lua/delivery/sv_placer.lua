@@ -133,6 +133,28 @@ hook.Add("PlayerSay", "Delivery_ResetNPCs", function(ply, text)
     return ""
 end)
 
+hook.Add("PlayerSay", "Delivery_RefreshConfig", function(ply, text)
+    if string.lower(text) ~= "!deliveryrefresh" then return end
+    if not ply:IsAdmin() then
+        ply:ChatPrint("[Delivery] Admins only.")
+        return ""
+    end
+
+    -- Server side refresh
+    include("delivery/sh_config.lua")
+    include("delivery/sh_tanker_config.lua")
+    include("delivery/sh_tanker_job_config.lua")
+    include("delivery/sh_grain_config.lua")
+    include("delivery/sh_grain_job_config.lua")
+    
+    -- Network to clients to refresh their side
+    net.Start("Delivery_RefreshConfig")
+    net.Broadcast()
+
+    ply:ChatPrint("[Delivery] Configuration refreshed. Cargo and NPC data updated.")
+    return ""
+end)
+
 hook.Add("PlayerSay", "Delivery_ExportNPCs", function(ply, text)
     if string.lower(text) ~= "!exportnpcs" then return end
     if not ply:IsAdmin() then
