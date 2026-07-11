@@ -216,21 +216,24 @@ local function OpenDeliveryMenu(npcKey, npcPos)
 
         local price = nil -- Pre-declare for slider callback usage
         local slider = nil
-        if isGrain and btnLabel == "Buy" and not locked then
+        if (isGrain or isLiquid) and btnLabel == "Buy" and not locked then
+            local cfg = isGrain and DELIVERY_GRAIN_CONFIG or DELIVERY_TANKER_CONFIG
+            local baseLitersFunc = isGrain and Delivery_GetGrainLiters or Delivery_GetLiquidLiters
+
             row:SetTall(100)
             slider = vgui.Create("DNumSlider", row)
             slider:SetPos(textX, 55)
             slider:SetSize(row:GetWide() - textX - 110, 40)
             slider:SetText("Amount (Liters)")
-            slider:SetMin(DELIVERY_GRAIN_CONFIG.minCapacityLiters)
-            slider:SetMax(DELIVERY_GRAIN_CONFIG.maxCapacityLiters)
+            slider:SetMin(cfg.minCapacityLiters)
+            slider:SetMax(cfg.maxCapacityLiters)
             slider:SetDecimals(0)
-            slider:SetValue(Delivery_GetGrainLiters(cargoEntry))
+            slider:SetValue(baseLitersFunc(cargoEntry))
             slider:SetDark(false)
 
             slider.OnValueChanged = function(s, val)
                 local basePrice = itemData.price
-                local baseLiters = Delivery_GetGrainLiters(cargoEntry)
+                local baseLiters = baseLitersFunc(cargoEntry)
                 local newPrice = math.ceil((val / baseLiters) * basePrice)
                 
                 -- Update the price label if we can find it
@@ -468,6 +471,12 @@ local function OpenDeliveryMenu(npcKey, npcPos)
                         currentTotalLiters = currentTotalLiters + bed:GetNWInt("DeliveryGrainBedLiters", 0)
                     end
                     displayLabel = itemData.label .. "  [" .. Delivery_FormatLiters(currentTotalLiters) .. " L loaded in " .. nearbyCount .. " bed(s)]"
+                    
+                    local basePrice = itemData.price
+                    local baseLiters = Delivery_GetGrainLiters(cargoEntry)
+                    if baseLiters > 0 then
+                        displayPrice = math.ceil((currentTotalLiters / baseLiters) * basePrice)
+                    end
                 else
                     displayLabel = itemData.label .. "  [no filled grain bed(s) nearby]"
                 end

@@ -272,7 +272,7 @@ local function FinishDrainTransfer(transfer)
     StopTankerTransfer(ply, "Sold " .. (transfer.cargo.label or transfer.cargoKey) .. " for $" .. transfer.price .. ".")
 end
 
-function Delivery_StartTankerTransfer(ply, npcPos, cargoKey, mode, price)
+function Delivery_StartTankerTransfer(ply, npcPos, cargoKey, mode, price, overrideLiters)
     local cargo = DELIVERY_CARGO[cargoKey]
     if not IsValid(ply) or not Delivery_IsLiquidCargo(cargo) then
         return false, "That cargo is not a liquid tanker job."
@@ -294,7 +294,7 @@ function Delivery_StartTankerTransfer(ply, npcPos, cargoKey, mode, price)
         return false, "That tanker is already being used."
     end
 
-    local targetLiters = Delivery_GetLiquidLiters(cargo)
+    local targetLiters = overrideLiters or Delivery_GetLiquidLiters(cargo)
     local currentLiquid = tanker:GetNWString("DeliveryTankerLiquidKey", "")
     local currentLiters = GetTankerCurrentLiters(tanker)
 

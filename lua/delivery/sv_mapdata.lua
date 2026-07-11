@@ -18,6 +18,18 @@ DELIVERY_MAPDATA = {
         { npc_key = "construction_site_manager", pos = Vector( -9166.60, -15105.19, 4096.42 ), ang = Angle( 0.00, 356.84, 0.00 ) },
 		{ npc_key = "grain_factory", pos = Vector( -5763.40, -14793.28, 32.29 ), ang = Angle( 0.00, 90.00, 0.00 ) },
         { npc_key = "grain_farm", pos = Vector( -261.64, -3362.12, 4361.32 ), ang = Angle( 0.00, 0.00, 0.00 ) },
+		{ npc_key = "tanker_refinery", pos = Vector( 12411.33, 7745.15, 5392.91 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+		{ npc_key = "tanker_gas_station_tnf", pos = Vector( 15149.09, 11664.29, 0.04 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+        { npc_key = "tanker_gas_station_hwy", pos = Vector( -8340.39, -9052.52, 4.29 ), ang = Angle( 0.00, 90.00, 0.00 ) },
+    },
+	["rp_ineu_valley2_v1a"] = {
+        { npc_key = "lumberjack", pos = Vector( -14686.44, -9561.10, 0.06 ), ang = Angle( 0.00, -180.00, 0.00 ) },
+        { npc_key = "sawmill_operator", pos = Vector( -347.68, -455.44, 256.11 ), ang = Angle( 0.00, -180.00, 0.00 ) },
+        { npc_key = "log_processor", pos = Vector( -555.37, 1633.84, 257.16 ), ang = Angle( 0.00, 180.00, 0.00 ) },
+        { npc_key = "construction_site", pos = Vector( 6049.18, 11972.67, 254.79 ), ang = Angle( 0.00, -135.44, 0.00 ) },
+        { npc_key = "steel_manager", pos = Vector( -659.30, 2748.20, 256.29 ), ang = Angle( 0.00, -90.00, 0.00 ) },
+		{ npc_key = "miner", pos = Vector( 5665.44, 12472.61, 255.97 ), ang = Angle( 0.00, 135.00, 0.00 ), spawnOffset = Vector(-155.02, 123.734, 292.69) },
+		{ npc_key = "material_processor", pos = Vector( -9696.29,-13270.9,1024.25 ), ang = Angle( 0.00, -180.00, 0.00 ) },
     },
 }
 

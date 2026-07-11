@@ -1,11 +1,18 @@
 TANKER_CARGO = TANKER_CARGO or {
 
-    ["diesel_tanker"] = {
+    ["diesel"] = {
         label = "Diesel",
         isLiquid = true,
         liters = 10000,
         densityKgPerLiter = 1,
-        allowedTeams = { "TEAM_HEAVY_DUTY" },
+        --allowedTeams = { "TEAM_HEAVY_DUTY" },
+    },
+	["gasoline"] = {
+        label = "Gasoline",
+        isLiquid = true,
+        liters = 10000,
+        densityKgPerLiter = 1,
+        --allowedTeams = { "TEAM_HEAVY_DUTY" },
     },
 
 }
@@ -17,17 +24,29 @@ TANKER_NPCS = TANKER_NPCS or {
         model = "models/humans/group01/male_04.mdl",
         spawnOffset = Vector(0, 40, 20),
         sells = {
-            { item = "diesel_tanker", label = "Diesel", price = 4500 },
+            { item = "diesel", label = "Diesel", price = 5000 },
+			{ item = "gasoline", label = "Gasoline", price = 5500 },
         },
         buys = {},
     },
-    ["tanker_gas_station"] = {
-        label = "Fuel Depot Manager",
+    ["tanker_gas_station_tnf"] = {
+        label = "Gas Station TNF",
         model = "models/humans/group01/male_07.mdl",
         spawnOffset = Vector(0, 40, 20),
         sells = {},
         buys = {
-            { item = "diesel_tanker", label = "Diesel", price = 6000 },
+            { item = "diesel", label = "Diesel", price = 7000 },
+			{ item = "gasoline", label = "Gasoline", price = 7700 },
+        },
+    },
+	["tanker_gas_station_hwy"] = {
+        label = "Gas Station BerBait",
+        model = "models/humans/group01/male_07.mdl",
+        spawnOffset = Vector(0, 40, 20),
+        sells = {},
+        buys = {
+            { item = "diesel", label = "Diesel", price = 7000 },
+			{ item = "gasoline", label = "Gasoline", price = 7700 },
         },
     },
 

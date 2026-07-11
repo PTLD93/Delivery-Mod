@@ -93,7 +93,7 @@ DELIVERY_CARGO = {
     ["wooden_beams_small"] = {
         label       = "Wooden Beams Small",
         model       = "models/cargo/timber_beams_medium_duty.mdl",
-        mass        = 5390,
+        mass        = 4620,
         limit       = 4,
 		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_LIGHT_DUTY" },
         --requires = { item = "logs_pile_small", ratio = 2 },
@@ -101,7 +101,7 @@ DELIVERY_CARGO = {
 	["wooden_beams"] = {
         label       = "Wooden Beams",
         model       = "models/cargo/timber_beams_heavy_duty.mdl",
-        mass        = 12320,
+        mass        = 9240,
         limit       = 4,
 		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_HEAVY_DUTY" },
         --requires = { item = "logs_pile", ratio = 2 },
@@ -109,7 +109,7 @@ DELIVERY_CARGO = {
 	["wooden_beams_large"] = {
         label       = "Wooden Beams Large",
         model       = "models/cargo/timber_beams_heavy_duty_large.mdl",
-        mass        = 19250,
+        mass        = 18480,
         limit       = 2,
 		--allowedTeam = "TEAM_HEAVY_DUTY",
         --requires = { item = "logs_pile_large", ratio = 2 },
@@ -183,6 +183,36 @@ DELIVERY_CARGO = {
         mass        = 800,
         limit       = 40,
 		--allowedTeams = { "TEAM_LIGHT_DUTY", "TEAM_LARGE_PICKUP" },
+        --produces = {
+            --{ item = "iron_pipes", ratio = 3 },
+        --},
+    },
+	["log_tora"] = {
+        label       = "Log Tora",
+        model       = "models/cargo/log_tora.mdl",
+        mass        = 3000,
+        limit       = 30,
+		--allowedTeams = { "TEAM_HEAVY_DUTY" },
+        --produces = {
+            --{ item = "iron_pipes", ratio = 3 },
+        --},
+    },
+	["log_tora_long"] = {
+        label       = "Log Tora Large",
+        model       = "models/cargo/log_tora_long.mdl",
+        mass        = 2800,
+        limit       = 30,
+		--allowedTeams = { "TEAM_HEAVY_DUTY" },
+        --produces = {
+            --{ item = "iron_pipes", ratio = 3 },
+        --},
+    },
+	["log_tora_long_2"] = {
+        label       = "Log Tora Large 2",
+        model       = "models/cargo/log_tora_long_2.mdl",
+        mass        = 4700,
+        limit       = 30,
+		--allowedTeams = { "TEAM_HEAVY_DUTY" },
         --produces = {
             --{ item = "iron_pipes", ratio = 3 },
         --},
@@ -452,6 +482,9 @@ DELIVERY_NPCS = {
 			{ item = "log_small", 				   label = "Log Small", price = 80 },
 			{ item = "log", 					 		label = "Log", price = 166 },
 			{ item = "log_large", 				  label = "Log Large", price = 333 },
+			{ item = "log_tora", 				  label = "Log Tora", price = 1000 },
+			{ item = "log_tora_long", 		label = "Log Tora Large", price = 2400 },
+			{ item = "log_tora_long_2",   label = "Log Tora Large 2", price = 3000 },
         },
         buys = {
             { item = "barrel",     label = "Barrel",     price = 150  },
@@ -478,6 +511,44 @@ DELIVERY_NPCS = {
 			{ item = "log_small", 				   label = "Log Small", price = 200 },
 			{ item = "log", 							 label = "Log", price = 433 },
 			{ item = "log_large", 				   label = "Log Large", price = 933 },
+			{ item = "log_tora", 				   label = "Log Tora", price = 1800 },
+			{ item = "log_tora_long", 		 label = "Log Tora Large", price = 3600 },
+			{ item = "log_tora_long_2",    label = "Log Tora Large 2", price = 4200 },
+        },
+    },
+	["log_processor"] = {
+        label = "Log Processor",
+        model = "models/humans/group01/male_04.mdl",
+        spawnOffset = Vector( 300, 650, 0 ),
+        sells = {
+        },
+        buys = {
+			{ item = "logs_pile_small",  label = "Pile Of Logs Small", price = 3000 },
+			{ item = "logs_pile",        label = "Pile Of Logs",       price = 6500 },
+			{ item = "logs_pile_large", label = "Pile Of Logs Large", price = 14000 },
+			{ item = "log_small", 				   label = "Log Small", price = 200 },
+			{ item = "log", 							 label = "Log", price = 433 },
+			{ item = "log_large", 				   label = "Log Large", price = 933 },
+			{ item = "log_tora", 				   label = "Log Tora", price = 1800 },
+			{ item = "log_tora_long", 		 label = "Log Tora Large", price = 3600 },
+			{ item = "log_tora_long_2",    label = "Log Tora Large 2", price = 4200 },
+        },
+    },
+	["sawmill_operator"] = {
+        label = "Sawmill Operator",
+        model = "models/humans/group01/male_04.mdl",
+        spawnOffset = Vector( 350, 0, 0 ),
+        sells = {
+            { item = "wooden_beams_small", 		  label = "Wooden Beams Small", price = 1000 },
+			{ item = "wooden_beams",       		  label = "Wooden Beams",       price = 3500 },
+			{ item = "wooden_beams_large", 		  label = "Wooden Beams Large", price = 7000 },
+			{ item = "wooden_beams_single", label = "Wooden Beams Single Stack", price = 140 },
+			{ item = "plywood_small", 			  	   label = "Plywood Small", price = 1500 },
+			{ item = "plywood",       			  	   label = "Plywood",       price = 4000 },
+			{ item = "plywood_large", 			  	   label = "Plywood Large", price = 8000 },
+			{ item = "plywood_single", 			 label = "Plywood Single Stack", price = 888 },
+        },
+        buys = {
         },
     },
 	["northern_steel_manager"] = {
@@ -490,6 +561,17 @@ DELIVERY_NPCS = {
         },
         buys = {
             { item = "ores", label = "Random Ores", price = 1100 },
+        },
+    },
+	["steel_manager"] = {
+        label = "Steel Manager",
+        model = "models/humans/group01/male_04.mdl",
+        spawnOffset = Vector( 150, 0, 100 ),
+        sells = {
+            { item = "iron_pipes",   label = "Iron Pipes", price = 4500 },
+			{ item = "large_tubes", label = "Large Tubes", price = 6500 },
+        },
+        buys = {
         },
     },
 	["construction_site_manager"] = {
@@ -509,6 +591,51 @@ DELIVERY_NPCS = {
 			{ item = "plywood",       				   label = "Plywood",       price = 9500 },
 			{ item = "plywood_large", 				  label = "Plywood Large", price = 15000 },
 			{ item = "plywood_single", 			label = "Plywood Single Stack", price = 1666 },
+        },
+    },
+	["construction_site"] = {
+        label = "Construction Site",
+        model = "models/humans/group01/male_04.mdl",
+        spawnOffset = Vector( 150, 0, 100 ),
+        sells = {
+        },
+        buys = {
+			{ item = "iron_pipes", 						 label = "Iron Pipes", price = 12000 },
+			{ item = "large_tubes", 					label = "Large Tubes", price = 18000 },
+            { item = "wooden_beams_small", 		  label = "Wooden Beams Small", price = 3000 },
+			{ item = "wooden_beams",       		  label = "Wooden Beams",       price = 8500 },
+			{ item = "wooden_beams_large", 		 label = "Wooden Beams Large", price = 15000 },
+			{ item = "wooden_beams_single", label = "Wooden Beams Single Stack", price = 300 },
+			{ item = "plywood_small", 				   label = "Plywood Small", price = 3500 },
+			{ item = "plywood",       				   label = "Plywood",       price = 9500 },
+			{ item = "plywood_large", 				  label = "Plywood Large", price = 15000 },
+			{ item = "plywood_single", 			label = "Plywood Single Stack", price = 1666 },
+        },
+    },
+	["material_processor"] = {
+        label = "Material Processor Guy",
+        model = "models/humans/group01/male_04.mdl",
+        spawnOffset = Vector( 150, 0, 100 ),
+        sells = {
+        },
+        buys = {
+			{ item = "ores", 							 label = "Random Ores", price = 1800 },
+            { item = "wooden_beams_small", 		  label = "Wooden Beams Small", price = 3300 },
+			{ item = "wooden_beams",       		  label = "Wooden Beams",       price = 8800 },
+			{ item = "wooden_beams_large", 		 label = "Wooden Beams Large", price = 15300 },
+			{ item = "wooden_beams_single", label = "Wooden Beams Single Stack", price = 600 },
+			{ item = "plywood_small", 				   label = "Plywood Small", price = 3800 },
+			{ item = "plywood",       				   label = "Plywood",       price = 9800 },
+			{ item = "plywood_large", 				  label = "Plywood Large", price = 15300 },
+			{ item = "plywood_single", 			label = "Plywood Single Stack", price = 1966 },
+			{ item = "logs_pile_small",  label = "Pile Of Logs Small", price = 3300 },
+			{ item = "logs_pile",        label = "Pile Of Logs",       price = 6800 },
+			{ item = "logs_pile_large", label = "Pile Of Logs Large", price = 14300 },
+			{ item = "log_small", 				   label = "Log Small", price = 500 },
+			{ item = "log", 							 label = "Log", price = 733 },
+			{ item = "log_large", 				   label = "Log Large", price = 1233 },
+			{ item = "log_tora", 				   label = "Log Tora", price = 2100 },
+			{ item = "log_tora_long", 		 label = "Log Tora Large", price = 3900 },
         },
     },
 	["laker_swinger"] = {
@@ -570,6 +697,65 @@ DELIVERY_NPCS = {
             { item = "ores", label = "Random Ores", price = 350 },
         },
         buys = {
+        },
+    },
+	
+	--Sunsetgulch 2 npcs
+	
+	["miner_sunsetgulch2"] = {
+        label = "Miner",
+        model = "models/humans/group01/male_07.mdl",
+        spawnOffset = Vector( 0, 75, 20 ),
+        sells = {
+            { item = "ores", label = "Random Ores", price = 350 },
+        },
+        buys = {
+        },
+    },
+	["material_processor"] = {
+        label = "Material Processor Guy",
+        model = "models/humans/group01/male_04.mdl",
+        spawnOffset = Vector( 150, 0, 100 ),
+        sells = {
+        },
+        buys = {
+			{ item = "ores", 							 label = "Random Ores", price = 1800 },
+            { item = "wooden_beams_small", 		  label = "Wooden Beams Small", price = 3300 },
+			{ item = "wooden_beams",       		  label = "Wooden Beams",       price = 8800 },
+			{ item = "wooden_beams_large", 		 label = "Wooden Beams Large", price = 15300 },
+			{ item = "wooden_beams_single", label = "Wooden Beams Single Stack", price = 600 },
+			{ item = "plywood_small", 				   label = "Plywood Small", price = 3800 },
+			{ item = "plywood",       				   label = "Plywood",       price = 9800 },
+			{ item = "plywood_large", 				  label = "Plywood Large", price = 15300 },
+			{ item = "plywood_single", 			label = "Plywood Single Stack", price = 1966 },
+        },
+    },
+	["Dragons Rock Cannery"] = {
+        label = "Northern Steel Manager",
+        model = "models/humans/group01/male_04.mdl",
+        spawnOffset = Vector( 150, 0, 100 ),
+        sells = {
+            { item = "iron_pipes",   label = "Iron Pipes", price = 4500 },
+			{ item = "large_tubes", label = "Large Tubes", price = 6500 },
+        },
+        buys = {
+        },
+    },
+	["log_processor_sunsetgulch2"] = {
+        label = "Log Processor",
+        model = "models/humans/group01/male_04.mdl",
+        spawnOffset = Vector( 300, 650, 0 ),
+        sells = {
+        },
+        buys = {
+			{ item = "logs_pile_small",  label = "Pile Of Logs Small", price = 3000 },
+			{ item = "logs_pile",        label = "Pile Of Logs",       price = 6500 },
+			{ item = "logs_pile_large", label = "Pile Of Logs Large", price = 14000 },
+			{ item = "log_small", 				   label = "Log Small", price = 200 },
+			{ item = "log", 							 label = "Log", price = 433 },
+			{ item = "log_large", 				   label = "Log Large", price = 933 },
+			{ item = "log_tora", 				   label = "Log Tora", price = 1800 },
+			{ item = "log_tora_long", 		 label = "Log Tora Large", price = 3600 },
         },
     },
 }

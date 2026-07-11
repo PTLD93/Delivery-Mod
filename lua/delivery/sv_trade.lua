@@ -23,7 +23,7 @@ net.Receive("DeliveryNPC_Buy", function(len, ply)
     local npcPos  = net.ReadVector()
     local cargoEntry = DELIVERY_CARGO[item]
     local requestedLiters = nil
-    if cargoEntry and Delivery_IsGrainCargo and Delivery_IsGrainCargo(cargoEntry) then
+    if cargoEntry and ((Delivery_IsGrainCargo and Delivery_IsGrainCargo(cargoEntry)) or Delivery_IsLiquidCargo(cargoEntry)) then
         requestedLiters = net.ReadUInt(32)
     end
 
@@ -111,7 +111,22 @@ net.Receive("DeliveryNPC_Buy", function(len, ply)
     end
 
     if Delivery_IsLiquidCargo(DELIVERY_CARGO[item]) then
-        local ok, msg = Delivery_StartTankerTransfer(ply, npcPos, item, "fill", itemData.price)
+        local basePrice = itemData.price
+        local baseLiters = Delivery_GetLiquidLiters(DELIVERY_CARGO[item])
+        local finalPrice = basePrice
+        local finalLiters = baseLiters
+
+        if requestedLiters and requestedLiters > 0 and baseLiters > 0 then
+            finalLiters = requestedLiters
+            finalPrice = math.ceil((requestedLiters / baseLiters) * basePrice)
+        end
+
+        if ply:getDarkRPVar("money") < finalPrice then
+            ply:ChatPrint("[Delivery] You don't have enough money!")
+            return
+        end
+
+        local ok, msg = Delivery_StartTankerTransfer(ply, npcPos, item, "fill", finalPrice, finalLiters)
         if not ok then
             ply:ChatPrint("[Delivery] " .. msg)
             return
@@ -255,7 +270,22 @@ net.Receive("DeliveryNPC_Sell", function(len, ply)
     end
 
     if Delivery_IsGrainCargo and Delivery_IsGrainCargo(DELIVERY_CARGO[item]) then
-        local ok, msg = Delivery_StartGrainTransfer(ply, IsValid(npcEnt) and npcEnt:GetPos() or nil, item, "drain", itemData.price)
+        local cargoEntry = DELIVERY_CARGO[item]
+        local grainBeds = Delivery_FindPlayerGrainBeds(ply, IsValid(npcEnt) and npcEnt:GetPos() or nil, item, true)
+        local totalLiters = 0
+        for _, bed in ipairs(grainBeds) do
+            totalLiters = totalLiters + bed:GetNWInt("DeliveryGrainBedLiters", 0)
+        end
+        
+        local basePrice = itemData.price
+        local baseLiters = Delivery_GetGrainLiters(cargoEntry)
+        local finalPrice = itemData.price
+        
+        if totalLiters > 0 and baseLiters > 0 then
+            finalPrice = math.ceil((totalLiters / baseLiters) * basePrice)
+        end
+        
+        local ok, msg = Delivery_StartGrainTransfer(ply, IsValid(npcEnt) and npcEnt:GetPos() or nil, item, "drain", finalPrice, totalLiters)
         if not ok then
             ply:ChatPrint("[Delivery] " .. msg)
             return

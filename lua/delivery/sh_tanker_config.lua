@@ -1,6 +1,6 @@
 DELIVERY_TANKER_CONFIG = DELIVERY_TANKER_CONFIG or {
     minCapacityLiters = 5000,
-    maxCapacityLiters = 30000,
+    maxCapacityLiters = 100000,
     minEmptyMassKg = 500,
     maxEmptyMassKg = 3000,
     defaultDensityKgPerLiter = 1,
