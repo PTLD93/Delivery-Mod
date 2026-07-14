@@ -1,6 +1,6 @@
 # Delivery Mod
 
-A DarkRP-style delivery/trucking gamemode addon for Garry's Mod. Players buy cargo from NPCs, haul it (by prop, tanker, or grain bed) to other NPCs to sell it, and can rank up their vehicle class as they earn money. Also bundles an Express parcel-delivery job, a Sewage collection job, and a simple Fishing minigame.
+A very simple system for DarkRP or Sandbox for delivery cargoes and a few sidejobs to do for other purpose vehicles,this mod is still in development,but updates may not be everyday since it requires testing and such.
 
 ## Table of Contents
 
