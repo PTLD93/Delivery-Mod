@@ -26,37 +26,36 @@ A DarkRP-style delivery/trucking gamemode addon for Garry's Mod. Players buy car
 
 ## Features
 
-- **General cargo system** — buy props from NPCs, physgun/tool them onto a vehicle, drive to another NPC and sell.
-- **Liquid tanker jobs** — mark any prop as a tanker, fill it with diesel/gasoline from a refinery NPC, and drain it at a gas station.
+- **General cargo system** — buy cargo from NPCs, either use a gravity gun or wire grabber, drive to another NPC and sell.
+- **Liquid tanker jobs** — mark any prop as a tanker, fill it with diesel/gasoline or any other form of liquid from a refinery NPC, and drain it at a gas station or somewhere else.
 - **Grain hauling jobs** — same idea as tankers, but for wheat/corn/soybeans between a farm and a silo.
 - **Sewage collection job** — collect waste from manholes around the map, haul it in a sewage tanker, and drain it at a dropoff for a payout.
-- **Express parcel job** — pick up a randomised load of packages from an NPC and deliver each one to its correct address before time runs out.
-- **Rank system** — a donator-style vendor NPC that lets players purchase progression tiers (Light/Medium/Heavy Duty) which unlock access to higher-value cargo and teams.
+- **Express parcel job** — this one is a bit different compared to the rest, youll have to approach the NPC, press E on them to get a job, and theres a bunch of catagories for each vehicle type, and once you start the job,it will give you a certain ammount of packages to deliver them to, and you have to do it before the timer runs out, or else your paycheck will be reduced depending on the number of packages youve delivered.
+- **Rank system** — this npc is basically how you unlock other types of cargoes for each catagory, youll see ALLOWTEAMS strings in the config files on some of the cargoes, it is currently commented out, you can re enable them by uncommenting them.
 - **Fishing minigame** — buy a rod and bait, cast into water, and catch fish of varying rarity/value.
-- **Admin placement tools** — every NPC, tanker, manhole, and dropoff is placed in-world via console commands and saved to a per-map SQL database, so layouts persist across restarts.
+- **Admin placement tools** — every NPC, manhole and dropoff is placed in-world via console commands and saved to a per-map SQL database, so layouts persist across restarts.
 
 ## Installation
 
 1. Drop the addon folder into your server's (or single-player) `garrysmod/addons/` directory.
-2. Make sure the folder contains the `lua/` directory and `addon.json` at its root.
-3. Restart the server (or relaunch the game). No additional dependencies are required, but an admin mod that supports `ply:IsAdmin()` (e.g. ULX) is recommended since most setup commands are admin-gated.
-4. As an admin, place your NPCs/tankers/manholes for your map using the commands in the [Admin Guide](#admin-guide) below.
+2. Restart the server (or relaunch the game). No additional dependencies are required, but an admin mod that supports `ply:IsAdmin()` (e.g. ULX) is recommended since most setup commands are admin-gated.
+4. As an admin, place your NPCs/manholes for your map using the commands in the [Admin Guide](#admin-guide) below.
 
 ## Player Guide
 
 ### General Cargo Delivery
 
 1. Find an NPC that **sells** cargo (open the buy menu by using — <kbd>E</kbd> — on them) and purchase an item. It spawns near the NPC.
-2. Use a vehicle or prop tool to load the cargo up and drive it to an NPC that **buys** that item.
+2. Use a vehicle or gravity gun to load the cargo up and drive it to an NPC that **buys** that item, incase you cant pick up a cargo with gravity gun, you must use wire grabber instead.
 3. Sell it to the NPC through the same menu for a payout.
-4. Some cargo types are gated to specific vehicle "teams" (e.g. only Heavy Duty trucks can carry certain loads) and some require another cargo type to have been delivered first before they're unlocked for purchase (shown greyed out with a "Requires: ..." label).
+4. Some cargoes will be restricted depending on the rank, you can either enable or disable them, but what this does is that it restricts cargoes for certain jobs, those being Light duty, Medium Duty and Heavy Duty,the rank NPC helps you unlock them by paying for each of the ranks.
 
 ### Tanker Jobs (Liquid Cargo)
 
 1. Spawn a prop to use as your tank, then select the **Delivery Tanker Tool** from the spawn menu (under the *Blue Light RP* tab) and left-click the prop to mark it as a tanker. Adjust capacity (in liters) with the tool's slider before marking it.
 2. Right-click the same prop with the tool to unmark it if you need to reassign it.
-3. Drive to a refinery NPC and use the tanker filling interaction to pump diesel/gasoline into your tank.
-4. Drive to a gas station NPC and drain the tanker for payment. Fill/drain both happen over time based on a transfer rate, not instantly.
+3. Drive to a refinery NPC and use the tanker filling interaction to pump diesel/gasoline or any other liquid of sort into your tank.
+4. Drive to a gas station NPC or somewhere else and drain the tanker for payment. Fill/drain both happen over time based on a transfer rate, not instantly.
 
 ### Grain Jobs
 
@@ -71,8 +70,8 @@ Works exactly like the tanker job above, but with the **Grain Bed Tool** instead
 ### Express Delivery Job
 
 1. Talk to an Express dispatcher NPC to get assigned a batch of packages (the number and vehicle-size requirement scale with your vehicle: Mini Van, Panel Van Small/Large, or Box Van).
-2. Pick up the packages and deliver each one to its matching address shown on your GPS/HUD before the timer runs out.
-3. Completing the run pays out based on how many packages you delivered and how quickly you did it.
+2. Pick up the packages and deliver each one to its matching address listed on the packages before the timer runs out, if you get lost, there is a provided GPS under Entities and in the catagory **Delivery Mod**.
+3. Completing the run pays out based on how many packages you delivered before the time runs out, delivering everything gets you the full payout.
 
 ### Rank System
 
@@ -91,6 +90,7 @@ All setup commands below are restricted to admins (`ply:IsAdmin()`). Run them in
 | Command | Description |
 |---|---|
 | `delivery_place <npc_key>` | Spawns and saves a delivery NPC of the given key at the surface you're looking at (e.g. `delivery_place npc_paperboy`). |
+| `delivery_placer` | Opens up a menu to easily select one of the npcs which will spawn in the spot youre looking at currently. |
 | `delivery_remove` | Removes the delivery NPC you're looking at (and deletes it from the database). |
 | `delivery_list` | Prints every valid `npc_key` and its display label to your chat, for use with `delivery_place`. |
 
@@ -143,7 +143,7 @@ All gameplay tuning lives in shared config files under `lua/delivery/` and `lua/
 | File | Controls |
 |---|---|
 | `sh_config.lua` | Core cargo list (`DELIVERY_CARGO`), NPC buy/sell offers (`DELIVERY_NPCS`), pickup radius, cargo limit, ownership timeout. |
-| `sh_tanker_config.lua` / `sh_tanker_job_config.lua` | Tanker capacity range, transfer rate, liquid cargo (diesel/gasoline) and their NPCs. |
+| `sh_tanker_config.lua` / `sh_tanker_job_config.lua` | Tanker capacity range, transfer rate, liquid cargo (diesel/gasoline) or other types of liquid and their NPCs. |
 | `sh_grain_config.lua` / `sh_grain_job_config.lua` | Grain bed capacity range, transfer rate, grain cargo (wheat/corn/soybeans) and their NPCs. |
 | `sh_sewage_config.lua` | Manhole count/payout, tanker capacity, fill/empty rates, list of manhole addresses. |
 | `sh_express_config.lua` | Package count ranges, time limits, payout caps, vehicle-size variants, delivery addresses, box models. |
@@ -169,5 +169,3 @@ lua/
 ```
 
 ---
-
-*Have an issue or want to extend this? Check the relevant config file above first — most tweaks (prices, addresses, cargo, NPCs) don't require touching any logic files.*
