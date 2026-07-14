@@ -1,6 +1,6 @@
 # Delivery Mod
 
-A very simple system for DarkRP or Sandbox for delivery cargoes and a few sidejobs to do for other purpose vehicles,this mod is still in development,but updates may not be everyday since it requires testing and such.
+A very simple system for DarkRP or Sandbox to deliver cargoes and a few sidejobs to do for other purpose vehicles,this mod is still in development,but updates may not be everyday since it requires testing and such.
 
 ## Table of Contents
 
