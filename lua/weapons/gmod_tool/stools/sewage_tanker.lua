@@ -7,6 +7,7 @@ local minCapacity = SEWAGE_CONFIG and SEWAGE_CONFIG.tankerCapacity or 10000
 local maxCapacity = SEWAGE_CONFIG and (SEWAGE_CONFIG.tankerCapacity * 3) or 30000
 
 TOOL.ClientConVar["capacity"] = tostring(minCapacity)
+TOOL.ClientConVar["nerfed"] = "0"
 
 if CLIENT then
     language.Add("tool.sewage_tanker.name", "Sewage Tanker Tool")
@@ -18,11 +19,15 @@ local function GetChosenCapacity(self)
     return math.Clamp(tonumber(self:GetClientNumber("capacity")) or minCapacity, minCapacity, maxCapacity)
 end
 
+local function GetChosenNerfed(self)
+    return self:GetClientNumber("nerfed", 0) == 1
+end
+
 function TOOL:LeftClick(trace)
     if CLIENT then return true end
 
     local ent = trace.Entity
-    local ok, msg = Delivery_MarkSewageTanker(self:GetOwner(), ent, GetChosenCapacity(self))
+    local ok, msg = Delivery_MarkSewageTanker(self:GetOwner(), ent, GetChosenCapacity(self), GetChosenNerfed(self))
     self:GetOwner():ChatPrint("[Sewage] " .. msg)
     return ok
 end
@@ -43,4 +48,5 @@ function TOOL.BuildCPanel(panel)
     if slider and slider.SetDecimals then
         slider:SetDecimals(0)
     end
+    panel:CheckBox("Nerfed (weight won't change when filled, payout -50%)", "sewage_tanker_nerfed")
 end

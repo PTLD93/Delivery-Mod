@@ -7,6 +7,7 @@ local minCapacity = DELIVERY_TANKER_CONFIG and DELIVERY_TANKER_CONFIG.minCapacit
 local maxCapacity = DELIVERY_TANKER_CONFIG and DELIVERY_TANKER_CONFIG.maxCapacityLiters or 30000
 
 TOOL.ClientConVar["capacity"] = tostring(minCapacity)
+TOOL.ClientConVar["nerfed"] = "0"
 
 if CLIENT then
     language.Add("tool.delivery_tanker.name", "Delivery Tanker Tool")
@@ -18,11 +19,15 @@ local function GetChosenCapacity(self)
     return Delivery_ClampTankerCapacity(self:GetClientNumber("capacity"))
 end
 
+local function GetChosenNerfed(self)
+    return self:GetClientNumber("nerfed", 0) == 1
+end
+
 function TOOL:LeftClick(trace)
     if CLIENT then return true end
 
     local ent = trace.Entity
-    local ok, msg = Delivery_MarkTankerProp(self:GetOwner(), ent, GetChosenCapacity(self))
+    local ok, msg = Delivery_MarkTankerProp(self:GetOwner(), ent, GetChosenCapacity(self), GetChosenNerfed(self))
     self:GetOwner():ChatPrint("[Delivery] " .. msg)
     return ok
 end
@@ -43,4 +48,5 @@ function TOOL.BuildCPanel(panel)
     if slider and slider.SetDecimals then
         slider:SetDecimals(0)
     end
+    panel:CheckBox("Nerfed (weight won't change when filled, sell price -50%)", "delivery_tanker_nerfed")
 end
