@@ -391,6 +391,206 @@ DELIVERY_CARGO = {
         --},
         },
     },
+	
+	
+			--Nerfed cargoes--
+	
+	["iron_pipes_nerfed"] = {
+        label       = "Iron Pipes (Nerfed)",
+        model       = "models/cargo/iron_pipes.mdl",
+        mass        = 4500,
+        limit       = 2,
+		--allowedTeam = "TEAM_HEAVY_DUTY",
+        --requires = { item = "ores", ratio = 3 },
+    },
+	["large_tubes_nerfed"] = {
+        label       = "Large Tubes (Nerfed)",
+        model       = "models/cargo/large_tubes.mdl",
+        mass        = 9900,
+        limit       = 2,
+		--allowedTeam = "TEAM_HEAVY_DUTY",
+        --requires = { item = "ores", ratio = 3 },
+    },
+	["large_tubes_nerfed"] = {
+        label       = "Large Tubes (Nerfed)",
+        model       = "models/cargo/large_tubes.mdl",
+        mass        = 9900,
+        limit       = 2,
+		--allowedTeam = "TEAM_HEAVY_DUTY",
+        --requires = { item = "ores", ratio = 3 },
+    },
+    ["logs_pile_small_nerfed"] = {
+        label       = "Pile Of Logs Small (Nerfed)",
+        model       = "models/cargo/logs_medium_duty.mdl",
+        mass        = 3750,
+        limit       = 4,
+		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_LIGHT_DUTY" },
+        --requires = { item = "barrel", ratio = 1 },
+        --produces = {
+            --{ item = "wooden_beams_small", ratio = 2 },
+        --},
+    },
+	["logs_pile_nerfed"] = {
+        label       = "Pile Of Logs (Nerfed)",
+        model       = "models/cargo/logs_heavy_duty.mdl",
+        mass        = 7500,
+        limit       = 4,
+		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_HEAVY_DUTY" },
+        --requires = { item = "barrel", ratio = 2 },
+        --produces = {
+            --{ item = "wooden_beams", ratio = 2 },
+        --},
+    },
+	["logs_pile_large_nerfed"] = {
+        label       = "Pile Of Logs Large (Nerfed)",
+        model       = "models/cargo/logs_heavy_duty_large.mdl",
+        mass        = 15000,
+        limit       = 2,
+		--allowedTeam = "TEAM_HEAVY_DUTY",
+        --requires = { item = "barrel", ratio = 4 },
+        --produces = {
+            --{ item = "wooden_beams_large", ratio = 2 },
+        --},
+    },
+    ["wooden_beams_small_nerfed"] = {
+        label       = "Wooden Beams Small (Nerfed)",
+        model       = "models/cargo/timber_beams_medium_duty.mdl",
+        mass        = 2700,
+        limit       = 4,
+		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_LIGHT_DUTY" },
+        --requires = { item = "logs_pile_small", ratio = 2 },
+    },
+	["wooden_beams_nerfed"] = {
+        label       = "Wooden Beams (Nerfed)",
+        model       = "models/cargo/timber_beams_heavy_duty.mdl",
+        mass        = 6200,
+        limit       = 4,
+		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_HEAVY_DUTY" },
+        --requires = { item = "logs_pile", ratio = 2 },
+    },
+	["wooden_beams_large_nerfed"] = {
+        label       = "Wooden Beams Large (Nerfed)",
+        model       = "models/cargo/timber_beams_heavy_duty_large.mdl",
+        mass        = 9600,
+        limit       = 2,
+		--allowedTeam = "TEAM_HEAVY_DUTY",
+        --requires = { item = "logs_pile_large", ratio = 2 },
+        
+    },
+	["plywood_small_nerfed"] = {
+        label       = "Plywood Small (Nerfed)",
+        model       = "models/cargo/plywood_medium_duty.mdl",
+        mass        = 2800,
+        limit       = 4,
+		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_LIGHT_DUTY" },
+        --requires = { item = "logs_pile_small", ratio = 2 },
+    },
+	["plywood_nerfed"] = {
+        label       = "Plywood (Nerfed)",
+        model       = "models/cargo/plywood_heavy_duty.mdl",
+        mass        = 4200,
+        limit       = 4,
+		--allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_HEAVY_DUTY" },
+        --requires = { item = "logs_pile", ratio = 2 },
+    },
+	["plywood_large_nerfed"] = {
+        label       = "Plywood Large (Nerfed)",
+        model       = "models/cargo/plywood_heavy_duty_large.mdl",
+        mass        = 6300,
+        limit       = 2,
+		--allowedTeam = "TEAM_HEAVY_DUTY",
+        --requires = { item = "logs_pile_large", ratio = 2 },
+        
+    },
+	["log_tora_nerfed"] = {
+        label       = "Log Tora (Nerfed)",
+        model       = "models/cargo/log_tora.mdl",
+        mass        = 1500,
+        limit       = 30,
+		--allowedTeams = { "TEAM_HEAVY_DUTY" },
+        --produces = {
+            --{ item = "iron_pipes", ratio = 3 },
+        --},
+    },
+	["log_tora_long_nerfed"] = {
+        label       = "Log Tora Large (Nerfed)",
+        model       = "models/cargo/log_tora_long.mdl",
+        mass        = 1400,
+        limit       = 30,
+		--allowedTeams = { "TEAM_HEAVY_DUTY" },
+        --produces = {
+            --{ item = "iron_pipes", ratio = 3 },
+        --},
+    },
+	["log_tora_long_2_nerfed"] = {
+        label       = "Log Tora Large 2 (Nerfed)",
+        model       = "models/cargo/log_tora_long_2.mdl",
+        mass        = 2350,
+        limit       = 30,
+		--allowedTeams = { "TEAM_HEAVY_DUTY" },
+        --produces = {
+            --{ item = "iron_pipes", ratio = 3 },
+        --},
+    },
+	
+	
+	
+	["log_small_nerfed"] = {
+        label = "Log Small (Nerfed)",
+        limit = 20,
+        --allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_LIGHT_DUTY" },
+        models = {
+            { model = "models/cargo/logs_medium_duty_2.mdl", mass = 500, price = 200 },
+			{ model = "models/cargo/logs_medium_duty_3.mdl", mass = 500, price = 200 },
+			{ model = "models/cargo/logs_medium_duty_4.mdl", mass = 500, price = 200 },
+			{ model = "models/cargo/logs_medium_duty_5.mdl", mass = 500, price = 200 },
+			{ model = "models/cargo/logs_medium_duty_6.mdl", mass = 500, price = 200 },
+			{ model = "models/cargo/logs_medium_duty_7.mdl", mass = 500, price = 200 },
+            
+        --requires = { item = "barrel", ratio = 1 },
+        --produces = {
+            --{ item = "wooden_beams_small", ratio = 2 },
+        --},
+        },
+    },
+	["log_nerfed"] = {
+        label = "Log (Nerfed)",
+        limit = 20,
+        --allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_HEAVY_DUTY" },
+        models = {
+            { model = "models/cargo/logs_heavy_duty_1.mdl", mass = 1000, price = 433 },
+			{ model = "models/cargo/logs_heavy_duty_2.mdl", mass = 1000, price = 433 },
+			{ model = "models/cargo/logs_heavy_duty_3.mdl", mass = 1000, price = 433 },
+			{ model = "models/cargo/logs_heavy_duty_4.mdl", mass = 1000, price = 433 },
+			{ model = "models/cargo/logs_heavy_duty_5.mdl", mass = 1000, price = 433 },
+			{ model = "models/cargo/logs_heavy_duty_6.mdl", mass = 1000, price = 433 },
+			{ model = "models/cargo/logs_heavy_duty_7.mdl", mass = 1000, price = 433 },
+            
+        --requires = { item = "barrel", ratio = 1 },
+        --produces = {
+            --{ item = "wooden_beams_small", ratio = 2 },
+        --},
+        },
+    },
+	["log_large_nerfed"] = {
+        label = "Log Large (Nerfed)",
+        limit = 20,
+        --allowedTeams = { "TEAM_MEDIUM_DUTY", "TEAM_HEAVY_DUTY" },
+        models = {
+            { model = "models/cargo/logs_heavy_duty_large_1.mdl", mass = 2000, price = 933 },
+			{ model = "models/cargo/logs_heavy_duty_large_2.mdl", mass = 2000, price = 933 },
+			{ model = "models/cargo/logs_heavy_duty_large_3.mdl", mass = 2000, price = 933 },
+			{ model = "models/cargo/logs_heavy_duty_large_4.mdl", mass = 2000, price = 933 },
+			{ model = "models/cargo/logs_heavy_duty_large_5.mdl", mass = 2000, price = 933 },
+			{ model = "models/cargo/logs_heavy_duty_large_6.mdl", mass = 2000, price = 933 },
+			{ model = "models/cargo/logs_heavy_duty_large_7.mdl", mass = 2000, price = 933 },
+            
+        --requires = { item = "barrel", ratio = 1 },
+        --produces = {
+            --{ item = "wooden_beams_small", ratio = 2 },
+        --},
+        },
+    },
 }
 
 DELIVERY_NPCS = {
@@ -485,6 +685,16 @@ DELIVERY_NPCS = {
 			{ item = "log_tora", 				  label = "Log Tora", price = 1000 },
 			{ item = "log_tora_long", 		label = "Log Tora Large", price = 2400 },
 			{ item = "log_tora_long_2",   label = "Log Tora Large 2", price = 3000 },
+			
+			{ item = "logs_pile_small_nerfed", label = "Pile Of Logs Small (Nerfed)", price = 600 },
+			{ item = "logs_pile_nerfed",       label = "Pile Of Logs (Nerfed)",       price = 1300 },
+			{ item = "logs_pile_large_nerfed", label = "Pile Of Logs (Nerfed) Large (Nerfed)", price = 2600 },
+			{ item = "log_small_nerfed", 				   label = "Log Small (Nerfed)", price = 40 },
+			{ item = "log_nerfed", 					 		label = "Log (Nerfed)", price = 85 },
+			{ item = "log_large_nerfed", 				  label = "Log Large (Nerfed)", price = 180 },
+			{ item = "log_tora_nerfed", 				  label = "Log Tora (Nerfed)", price = 450 },
+			{ item = "log_tora_long_nerfed", 		label = "Log Tora Large (Nerfed)", price = 600 },
+			{ item = "log_tora_long_2_nerfed",   label = "Log Tora Large 2 (Nerfed)", price = 725 },
         },
         buys = {
             { item = "barrel",     label = "Barrel",     price = 150  },
@@ -503,6 +713,13 @@ DELIVERY_NPCS = {
 			{ item = "plywood",       			  	   label = "Plywood",       price = 4000 },
 			{ item = "plywood_large", 			  	   label = "Plywood Large", price = 8000 },
 			{ item = "plywood_single", 			 label = "Plywood Single Stack", price = 888 },
+			
+			{ item = "wooden_beams_small_nerfed", 		  label = "Wooden Beams Small (Nerfed)", price = 500 },
+			{ item = "wooden_beams_nerfed",       		  label = "Wooden Beams (Nerfed)",       price = 1800 },
+			{ item = "wooden_beams_large_nerfed", 		  label = "Wooden Beams Large (Nerfed)", price = 3500 },
+			{ item = "plywood_small_nerfed", 			  	   label = "Plywood Small (Nerfed)", price = 750 },
+			{ item = "plywood_nerfed",       			  	   label = "Plywood (Nerfed)",       price = 2000 },
+			{ item = "plywood_large_nerfed", 			  	   label = "Plywood Large (Nerfed)", price = 4000 },
         },
         buys = {
 			{ item = "logs_pile_small",  label = "Pile Of Logs Small", price = 3000 },
@@ -514,6 +731,16 @@ DELIVERY_NPCS = {
 			{ item = "log_tora", 				   label = "Log Tora", price = 1800 },
 			{ item = "log_tora_long", 		 label = "Log Tora Large", price = 3600 },
 			{ item = "log_tora_long_2",    label = "Log Tora Large 2", price = 4200 },
+			
+			{ item = "logs_pile_small_nerfed", label = "Pile Of Logs Small (Nerfed)", price = 1500 },
+			{ item = "logs_pile_nerfed",       label = "Pile Of Logs (Nerfed)",       price = 3200 },
+			{ item = "logs_pile_large_nerfed", label = "Pile Of Logs (Nerfed) Large (Nerfed)", price = 6500 },
+			{ item = "log_small_nerfed", 				   label = "Log Small (Nerfed)", price = 100 },
+			{ item = "log_nerfed", 					 		label = "Log (Nerfed)", price = 220 },
+			{ item = "log_large_nerfed", 				  label = "Log Large (Nerfed)", price = 480 },
+			{ item = "log_tora_nerfed", 				  label = "Log Tora (Nerfed)", price = 900 },
+			{ item = "log_tora_long_nerfed", 		label = "Log Tora Large (Nerfed)", price = 1200 },
+			{ item = "log_tora_long_2_nerfed",   label = "Log Tora Large 2 (Nerfed)", price = 1450 },
         },
     },
 	["log_processor"] = {
@@ -532,6 +759,16 @@ DELIVERY_NPCS = {
 			{ item = "log_tora", 				   label = "Log Tora", price = 1800 },
 			{ item = "log_tora_long", 		 label = "Log Tora Large", price = 3600 },
 			{ item = "log_tora_long_2",    label = "Log Tora Large 2", price = 4200 },
+			
+			{ item = "logs_pile_small_nerfed", label = "Pile Of Logs Small (Nerfed)", price = 1500 },
+			{ item = "logs_pile_nerfed",       label = "Pile Of Logs (Nerfed)",       price = 3200 },
+			{ item = "logs_pile_large_nerfed", label = "Pile Of Logs (Nerfed) Large (Nerfed)", price = 6500 },
+			{ item = "log_small_nerfed", 				   label = "Log Small (Nerfed)", price = 100 },
+			{ item = "log_nerfed", 					 		label = "Log (Nerfed)", price = 220 },
+			{ item = "log_large_nerfed", 				  label = "Log Large (Nerfed)", price = 480 },
+			{ item = "log_tora_nerfed", 				  label = "Log Tora (Nerfed)", price = 900 },
+			{ item = "log_tora_long_nerfed", 		label = "Log Tora Large (Nerfed)", price = 1200 },
+			{ item = "log_tora_long_2_nerfed",   label = "Log Tora Large 2 (Nerfed)", price = 1450 },
         },
     },
 	["sawmill_operator"] = {
@@ -547,6 +784,13 @@ DELIVERY_NPCS = {
 			{ item = "plywood",       			  	   label = "Plywood",       price = 4000 },
 			{ item = "plywood_large", 			  	   label = "Plywood Large", price = 8000 },
 			{ item = "plywood_single", 			 label = "Plywood Single Stack", price = 888 },
+			
+			{ item = "wooden_beams_small_nerfed", 		  label = "Wooden Beams Small (Nerfed)", price = 500 },
+			{ item = "wooden_beams_nerfed",       		  label = "Wooden Beams (Nerfed)",       price = 1800 },
+			{ item = "wooden_beams_large_nerfed", 		  label = "Wooden Beams Large (Nerfed)", price = 3500 },
+			{ item = "plywood_small_nerfed", 			  	   label = "Plywood Small (Nerfed)", price = 750 },
+			{ item = "plywood_nerfed",       			  	   label = "Plywood (Nerfed)",       price = 2000 },
+			{ item = "plywood_large_nerfed", 			  	   label = "Plywood Large (Nerfed)", price = 4000 },
         },
         buys = {
         },
@@ -558,6 +802,9 @@ DELIVERY_NPCS = {
         sells = {
             { item = "iron_pipes",   label = "Iron Pipes", price = 4500 },
 			{ item = "large_tubes", label = "Large Tubes", price = 6500 },
+			
+			{ item = "iron_pipes_nerfed",   label = "Iron Pipes (Nerfed)", price = 2200 },
+			{ item = "large_tubes_nerfed", label = "Large Tubes (Nerfed)", price = 3200 },
         },
         buys = {
             { item = "ores", label = "Random Ores", price = 1100 },
@@ -570,6 +817,9 @@ DELIVERY_NPCS = {
         sells = {
             { item = "iron_pipes",   label = "Iron Pipes", price = 4500 },
 			{ item = "large_tubes", label = "Large Tubes", price = 6500 },
+			
+			{ item = "iron_pipes_nerfed",   label = "Iron Pipes (Nerfed)", price = 2200 },
+			{ item = "large_tubes_nerfed", label = "Large Tubes (Nerfed)", price = 3200 },
         },
         buys = {
         },
@@ -591,6 +841,15 @@ DELIVERY_NPCS = {
 			{ item = "plywood",       				   label = "Plywood",       price = 9500 },
 			{ item = "plywood_large", 				  label = "Plywood Large", price = 15000 },
 			{ item = "plywood_single", 			label = "Plywood Single Stack", price = 1666 },
+			
+			{ item = "iron_pipes_nerfed",   	 label = "Iron Pipes (Nerfed)", price = 5200 },
+			{ item = "large_tubes_nerfed", label = "Large Tubes (Nerfed)", price = 8000 },
+			{ item = "wooden_beams_small_nerfed", 		  label = "Wooden Beams Small (Nerfed)", price = 1500 },
+			{ item = "wooden_beams_nerfed",       		  label = "Wooden Beams (Nerfed)",       price = 4200 },
+			{ item = "wooden_beams_large_nerfed", 		  label = "Wooden Beams Large (Nerfed)", price = 8000 },
+			{ item = "plywood_small_nerfed", 			  	   label = "Plywood Small (Nerfed)", price = 1750 },
+			{ item = "plywood_nerfed",       			  	   label = "Plywood (Nerfed)",       price = 4800 },
+			{ item = "plywood_large_nerfed", 			  	   label = "Plywood Large (Nerfed)", price = 9000 },
         },
     },
 	["construction_site"] = {
@@ -610,6 +869,15 @@ DELIVERY_NPCS = {
 			{ item = "plywood",       				   label = "Plywood",       price = 9500 },
 			{ item = "plywood_large", 				  label = "Plywood Large", price = 15000 },
 			{ item = "plywood_single", 			label = "Plywood Single Stack", price = 1666 },
+			
+			{ item = "iron_pipes_nerfed",   	 label = "Iron Pipes (Nerfed)", price = 5200 },
+			{ item = "large_tubes_nerfed", label = "Large Tubes (Nerfed)", price = 8000 },
+			{ item = "wooden_beams_small_nerfed", 		  label = "Wooden Beams Small (Nerfed)", price = 1500 },
+			{ item = "wooden_beams_nerfed",       		  label = "Wooden Beams (Nerfed)",       price = 4200 },
+			{ item = "wooden_beams_large_nerfed", 		  label = "Wooden Beams Large (Nerfed)", price = 8000 },
+			{ item = "plywood_small_nerfed", 			  	   label = "Plywood Small (Nerfed)", price = 1750 },
+			{ item = "plywood_nerfed",       			  	   label = "Plywood (Nerfed)",       price = 4800 },
+			{ item = "plywood_large_nerfed", 			  	   label = "Plywood Large (Nerfed)", price = 9000 },
         },
     },
 	["material_processor"] = {
@@ -636,6 +904,22 @@ DELIVERY_NPCS = {
 			{ item = "log_large", 				   label = "Log Large", price = 1233 },
 			{ item = "log_tora", 				   label = "Log Tora", price = 2100 },
 			{ item = "log_tora_long", 		 label = "Log Tora Large", price = 3900 },
+			
+			{ item = "logs_pile_small_nerfed", label = "Pile Of Logs Small (Nerfed)", price = 1500 },
+			{ item = "logs_pile_nerfed",       label = "Pile Of Logs (Nerfed)",       price = 3200 },
+			{ item = "logs_pile_large_nerfed", label = "Pile Of Logs (Nerfed) Large (Nerfed)", price = 6500 },
+			{ item = "log_small_nerfed", 				   label = "Log Small (Nerfed)", price = 100 },
+			{ item = "log_nerfed", 					 		label = "Log (Nerfed)", price = 220 },
+			{ item = "log_large_nerfed", 				  label = "Log Large (Nerfed)", price = 480 },
+			{ item = "log_tora_nerfed", 				  label = "Log Tora (Nerfed)", price = 900 },
+			{ item = "log_tora_long_nerfed", 		label = "Log Tora Large (Nerfed)", price = 1200 },
+			{ item = "log_tora_long_2_nerfed",   label = "Log Tora Large 2 (Nerfed)", price = 1450 },
+			{ item = "wooden_beams_small_nerfed", 		  label = "Wooden Beams Small (Nerfed)", price = 1500 },
+			{ item = "wooden_beams_nerfed",       		  label = "Wooden Beams (Nerfed)",       price = 4200 },
+			{ item = "wooden_beams_large_nerfed", 		  label = "Wooden Beams Large (Nerfed)", price = 8000 },
+			{ item = "plywood_small_nerfed", 			  	   label = "Plywood Small (Nerfed)", price = 1750 },
+			{ item = "plywood_nerfed",       			  	   label = "Plywood (Nerfed)",       price = 4800 },
+			{ item = "plywood_large_nerfed", 			  	   label = "Plywood Large (Nerfed)", price = 9000 },
         },
     },
 	["laker_swinger"] = {
@@ -728,6 +1012,13 @@ DELIVERY_NPCS = {
 			{ item = "plywood",       				   label = "Plywood",       price = 9800 },
 			{ item = "plywood_large", 				  label = "Plywood Large", price = 15300 },
 			{ item = "plywood_single", 			label = "Plywood Single Stack", price = 1966 },
+			
+			{ item = "wooden_beams_small_nerfed", 		  label = "Wooden Beams Small (Nerfed)", price = 1500 },
+			{ item = "wooden_beams_nerfed",       		  label = "Wooden Beams (Nerfed)",       price = 4200 },
+			{ item = "wooden_beams_large_nerfed", 		  label = "Wooden Beams Large (Nerfed)", price = 8000 },
+			{ item = "plywood_small_nerfed", 			  	   label = "Plywood Small (Nerfed)", price = 1750 },
+			{ item = "plywood_nerfed",       			  	   label = "Plywood (Nerfed)",       price = 4800 },
+			{ item = "plywood_large_nerfed", 			  	   label = "Plywood Large (Nerfed)", price = 9000 },
         },
     },
 	["Dragons Rock Cannery"] = {
@@ -736,6 +1027,7 @@ DELIVERY_NPCS = {
         spawnOffset = Vector( 150, 0, 100 ),
         sells = {
             { item = "iron_pipes",   label = "Iron Pipes", price = 4500 },
+			{ item = "iron_pipes_nerfed", label = "Iron Pipes (Nerfed)", price = 2200 },
 			{ item = "large_tubes", label = "Large Tubes", price = 6500 },
         },
         buys = {
@@ -756,6 +1048,16 @@ DELIVERY_NPCS = {
 			{ item = "log_large", 				   label = "Log Large", price = 933 },
 			{ item = "log_tora", 				   label = "Log Tora", price = 1800 },
 			{ item = "log_tora_long", 		 label = "Log Tora Large", price = 3600 },
+			
+			{ item = "logs_pile_small_nerfed", label = "Pile Of Logs Small (Nerfed)", price = 1500 },
+			{ item = "logs_pile_nerfed",       label = "Pile Of Logs (Nerfed)",       price = 3200 },
+			{ item = "logs_pile_large_nerfed", label = "Pile Of Logs (Nerfed) Large (Nerfed)", price = 6500 },
+			{ item = "log_small_nerfed", 				   label = "Log Small (Nerfed)", price = 100 },
+			{ item = "log_nerfed", 					 		label = "Log (Nerfed)", price = 220 },
+			{ item = "log_large_nerfed", 				  label = "Log Large (Nerfed)", price = 480 },
+			{ item = "log_tora_nerfed", 				  label = "Log Tora (Nerfed)", price = 900 },
+			{ item = "log_tora_long_nerfed", 		label = "Log Tora Large (Nerfed)", price = 1200 },
+			{ item = "log_tora_long_2_nerfed",   label = "Log Tora Large 2 (Nerfed)", price = 1450 },
         },
     },
 }
