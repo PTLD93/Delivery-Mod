@@ -27,6 +27,7 @@ local function StoreSewageTankerModifier(ent)
     duplicator.StoreEntityModifier(ent, "sewage_tanker", {
         capacity = ent:GetNWInt("SewageTankerCapacity", 0),
         originalMass = ent:GetNWFloat("SewageTankerOriginalMass", 50),
+        nerfed = ent:GetNWBool("SewageTankerNerfed", false),
     })
 end
 
@@ -61,7 +62,8 @@ local function SetSewageTankerLiters(ent, liters)
     ent:SetNWInt("SewageTankerLiters", math.floor(liters + 0.5))
 
     local emptyMass = ent:GetNWFloat("SewageTankerEmptyMass", SEWAGE_CONFIG.tankerEmptyMass)
-    local totalMass = emptyMass + liters * SEWAGE_CONFIG.tankerFullMassPerLiter
+    local nerfed = ent:GetNWBool("SewageTankerNerfed", false)
+    local totalMass = nerfed and emptyMass or (emptyMass + liters * SEWAGE_CONFIG.tankerFullMassPerLiter)
     SetPropMass(ent, totalMass)
 
     if WireLib and ent.Outputs then
@@ -107,7 +109,7 @@ function Delivery_FindPlayerSewageTanker(ply, nearPos, requireSpace)
     return best
 end
 
-function Delivery_MarkSewageTanker(ply, ent, customCapacity)
+function Delivery_MarkSewageTanker(ply, ent, customCapacity, nerfed)
     if not IsValid(ply) then return false, "Invalid player." end
     if not IsValid(ent) or not SUPPORTED_CLASSES[ent:GetClass()] then
         return false, "Look at a valid physics prop."
@@ -131,6 +133,7 @@ function Delivery_MarkSewageTanker(ply, ent, customCapacity)
     local capacity    = customCapacity or SEWAGE_CONFIG.tankerCapacity
     local originalMass = phys:GetMass()
     local emptyMass   = capacity / 10
+    nerfed = nerfed and true or false
 
     ent:SetNWBool("SewageIsTanker", true)
     ent:SetNWString("SewageTankerOwnerID", ply:SteamID64() or "")
@@ -139,6 +142,7 @@ function Delivery_MarkSewageTanker(ply, ent, customCapacity)
     ent:SetNWFloat("SewageTankerEmptyMass", emptyMass)
     ent:SetNWFloat("SewageTankerOriginalMass", originalMass)
     ent:SetNWBool("SewageTankerBusy", false)
+    ent:SetNWBool("SewageTankerNerfed", nerfed)
     ent:SetNWFloat("SewageTankerLitersFloat", 0)
     ent:SetNWInt("SewageTankerLiters", 0)
 
@@ -151,7 +155,11 @@ function Delivery_MarkSewageTanker(ply, ent, customCapacity)
         WireLib.TriggerOutput(ent, "Liters", 0)
     end
 
-    return true, string.format("Marked as sewage tanker (%dL capacity).", capacity)
+    return true, string.format(
+        "Marked as sewage tanker (%dL capacity).%s",
+        capacity,
+        nerfed and " (NERFED: weight will not change and payout is halved)" or ""
+    )
 end
 
 function Delivery_UnmarkSewageTanker(ply, ent)
@@ -176,6 +184,7 @@ function Delivery_UnmarkSewageTanker(ply, ent)
     ent:SetNWFloat("SewageTankerEmptyMass", 0)
     ent:SetNWFloat("SewageTankerOriginalMass", 0)
     ent:SetNWBool("SewageTankerBusy", false)
+    ent:SetNWBool("SewageTankerNerfed", false)
     ent:SetNWFloat("SewageTankerLitersFloat", 0)
     ent:SetNWInt("SewageTankerLiters", 0)
 
@@ -195,6 +204,7 @@ duplicator.RegisterEntityModifier("sewage_tanker", function(ply, ent, data)
     local capacity = tonumber(data and data.capacity) or SEWAGE_CONFIG.tankerCapacity
     local originalMass = tonumber(data and data.originalMass) or 50
     local emptyMass = capacity / 10
+    local nerfed = data and data.nerfed and true or false
 
     ent:SetNWBool("SewageIsTanker", true)
     ent:SetNWString("SewageTankerOwnerID", IsValid(ply) and (ply:SteamID64() or "") or "")
@@ -203,6 +213,7 @@ duplicator.RegisterEntityModifier("sewage_tanker", function(ply, ent, data)
     ent:SetNWFloat("SewageTankerEmptyMass", emptyMass)
     ent:SetNWFloat("SewageTankerOriginalMass", originalMass)
     ent:SetNWBool("SewageTankerBusy", false)
+    ent:SetNWBool("SewageTankerNerfed", nerfed)
     ent:SetNWFloat("SewageTankerLitersFloat", 0)
     ent:SetNWInt("SewageTankerLiters", 0)
 
@@ -317,13 +328,15 @@ timer.Create("Delivery_SewageTankerTick", SEWAGE_CONFIG.transferTick, 0, functio
             SetSewageTankerLiters(transfer.tanker, newLiters)
 
             if newLiters <= 0 then
+                local nerfed = transfer.tanker:GetNWBool("SewageTankerNerfed", false)
                 StopSewageTransfer(ply)
 
                 local job = GetJob(ply)
                 if job then
                     job.drained = true
+                    job.nerfed = nerfed
                     SendJobSync(ply)
-                    ply:ChatPrint("[Sewage] Tanker emptied. Return to the sewage NPC to collect your payment.")
+                    ply:ChatPrint("[Sewage] Tanker emptied. Return to the sewage NPC to collect your payment." .. (nerfed and " (NERFED: payout will be halved)" or ""))
                 end
             end
         end
@@ -411,9 +424,13 @@ net.Receive("Sewage_RequestPayment", function(len, ply)
     local collected = job.collected
     local payout    = total > 0 and math.floor((collected / total) * SEWAGE_CONFIG.fullPayout / 10) * 10 or 0
 
+    if job.nerfed then
+        payout = math.floor(payout * 0.5)
+    end
+
     if payout > 0 then
         ply:addMoney(payout)
-        ply:ChatPrint("[Sewage] Paid $" .. payout .. " for " .. collected .. "/" .. total .. " manholes collected.")
+        ply:ChatPrint("[Sewage] Paid $" .. payout .. " for " .. collected .. "/" .. total .. " manholes collected." .. (job.nerfed and " (NERFED, -50%)" or ""))
     else
         ply:ChatPrint("[Sewage] No manholes collected - no payment.")
     end

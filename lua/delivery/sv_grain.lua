@@ -40,7 +40,8 @@ local function SetGrainBedState(ent, cargoKey, liters)
     ent:SetNWInt("DeliveryGrainBedLiters", math.floor(liters + 0.5))
 
     local mass = ent:GetNWFloat("DeliveryGrainBedEmptyMass", 0)
-    if cargoKey ~= "" and liters > 0 then
+    local nerfed = ent:GetNWBool("DeliveryGrainBedNerfed", false)
+    if not nerfed and cargoKey ~= "" and liters > 0 then
         mass = mass + (liters * Delivery_GetGrainDensity(cargoKey))
     end
 
@@ -51,6 +52,7 @@ local function StoreGrainBedModifier(ent)
     duplicator.StoreEntityModifier(ent, "delivery_grain", {
         capacityLiters = ent:GetNWInt("DeliveryGrainBedCapacity", 0),
         originalMassKg = ent:GetNWFloat("DeliveryGrainBedOriginalMass", 50),
+        nerfed = ent:GetNWBool("DeliveryGrainBedNerfed", false),
     })
 end
 
@@ -75,7 +77,7 @@ local function StartTransferSound(ent, soundPath)
     ent:EmitSound(soundPath, 75, 100, 1, CHAN_STATIC, SND_LOOPING)
 end
 
-local function ApplyGrainBedMetadata(ent, ownerId, ownerEnt, capacity, originalMass, emptyMass)
+local function ApplyGrainBedMetadata(ent, ownerId, ownerEnt, capacity, originalMass, emptyMass, nerfed)
     ent:SetNWBool("DeliveryIsGrainBed", true)
     ent:SetNWString("DeliveryGrainBedOwnerID", ownerId or "")
     ent:SetNWEntity("DeliveryGrainBedOwner", ownerEnt or NULL)
@@ -83,6 +85,7 @@ local function ApplyGrainBedMetadata(ent, ownerId, ownerEnt, capacity, originalM
     ent:SetNWFloat("DeliveryGrainBedOriginalMass", originalMass)
     ent:SetNWFloat("DeliveryGrainBedEmptyMass", emptyMass)
     ent:SetNWBool("DeliveryGrainBedBusy", false)
+    ent:SetNWBool("DeliveryGrainBedNerfed", nerfed and true or false)
     ent:SetNWString("DeliveryGrainBedCargoKey", "")
     ent:SetNWFloat("DeliveryGrainBedLitersFloat", 0)
     ent:SetNWInt("DeliveryGrainBedLiters", 0)
@@ -94,6 +97,7 @@ duplicator.RegisterEntityModifier("delivery_grain", function(ply, ent, data)
     local capacity = Delivery_ClampGrainBedCapacity(data and data.capacityLiters)
     local originalMass = tonumber(data and data.originalMassKg) or 50
     local emptyMass = Delivery_GetGrainBedEmptyMass(capacity)
+    local nerfed = data and data.nerfed and true or false
 
     ApplyGrainBedMetadata(
         ent,
@@ -101,7 +105,8 @@ duplicator.RegisterEntityModifier("delivery_grain", function(ply, ent, data)
         IsValid(ply) and ply or NULL,
         capacity,
         originalMass,
-        emptyMass
+        emptyMass,
+        nerfed
     )
 
     SetPropMass(ent, emptyMass)
@@ -211,8 +216,21 @@ local function FinishDrainGrainTransfer(transfer)
         return
     end
 
-    ply:addMoney(transfer.price)
-    StopGrainTransfer(ply, "Sold " .. (transfer.cargo.label or transfer.cargoKey) .. " for $" .. transfer.price .. ".")
+    local nerfed = false
+    for _, bed in ipairs(transfer.grainBeds or {}) do
+        if IsValid(bed) and bed:GetNWBool("DeliveryGrainBedNerfed", false) then
+            nerfed = true
+            break
+        end
+    end
+
+    local price = transfer.price
+    if nerfed then
+        price = math.floor(price * 0.5)
+    end
+
+    ply:addMoney(price)
+    StopGrainTransfer(ply, "Sold " .. (transfer.cargo.label or transfer.cargoKey) .. " for $" .. price .. (nerfed and " (NERFED, -50%)" or "") .. ".")
 end
 
 function Delivery_StartGrainTransfer(ply, npcPos, cargoKey, mode, price, overrideLiters)
@@ -363,7 +381,7 @@ timer.Create("Delivery_GrainTransferTick", transferTickSeconds, 0, function()
     end
 end)
 
-function Delivery_MarkGrainBedProp(ply, ent, capacityLiters)
+function Delivery_MarkGrainBedProp(ply, ent, capacityLiters, nerfed)
     if not IsValid(ply) or not IsSupportedGrainBedClass(ent) then
         return false, "Look at a valid physics prop."
     end
@@ -388,13 +406,18 @@ function Delivery_MarkGrainBedProp(ply, ent, capacityLiters)
     local capacity = Delivery_ClampGrainBedCapacity(capacityLiters)
     local originalMass = phys:GetMass()
     local emptyMass = Delivery_GetGrainBedEmptyMass(capacity)
+    nerfed = nerfed and true or false
 
-    ApplyGrainBedMetadata(ent, ply:SteamID64() or "", ply, capacity, originalMass, emptyMass)
+    ApplyGrainBedMetadata(ent, ply:SteamID64() or "", ply, capacity, originalMass, emptyMass, nerfed)
 
     StoreGrainBedModifier(ent)
     SetPropMass(ent, emptyMass)
 
-    return true, string.format("Marked grain bed at %d L capacity.", capacity)
+    return true, string.format(
+        "Marked grain bed at %d L capacity.%s",
+        capacity,
+        nerfed and " (NERFED: weight will not change and sell price is halved)" or ""
+    )
 end
 
 function Delivery_UnmarkGrainBedProp(ply, ent)
@@ -420,6 +443,7 @@ function Delivery_UnmarkGrainBedProp(ply, ent)
     ent:SetNWFloat("DeliveryGrainBedOriginalMass", 0)
     ent:SetNWFloat("DeliveryGrainBedEmptyMass", 0)
     ent:SetNWBool("DeliveryGrainBedBusy", false)
+    ent:SetNWBool("DeliveryGrainBedNerfed", false)
     ent:SetNWString("DeliveryGrainBedCargoKey", "")
     ent:SetNWFloat("DeliveryGrainBedLitersFloat", 0)
     ent:SetNWInt("DeliveryGrainBedLiters", 0)

@@ -48,7 +48,8 @@ local function SetTankerLiquidState(ent, cargoKey, liters)
     ent:SetNWInt("DeliveryTankerLiquidLiters", math.floor(liters + 0.5))
 
     local mass = ent:GetNWFloat("DeliveryTankerEmptyMass", 0)
-    if cargoKey ~= "" and liters > 0 then
+    local nerfed = ent:GetNWBool("DeliveryTankerNerfed", false)
+    if not nerfed and cargoKey ~= "" and liters > 0 then
         mass = mass + (liters * Delivery_GetLiquidDensity(cargoKey))
     end
 
@@ -59,6 +60,7 @@ local function StoreTankerModifier(ent)
     duplicator.StoreEntityModifier(ent, "delivery_tanker", {
         capacityLiters = ent:GetNWInt("DeliveryTankerCapacity", 0),
         originalMassKg = ent:GetNWFloat("DeliveryTankerOriginalMass", 50),
+        nerfed = ent:GetNWBool("DeliveryTankerNerfed", false),
     })
 end
 
@@ -107,7 +109,7 @@ local function StartTransferSound(ent, soundPath)
     ent.DeliveryTankerTransferSound = true
 end
 
-local function ApplyTankerMetadata(ent, ownerId, ownerEnt, capacity, originalMass, emptyMass)
+local function ApplyTankerMetadata(ent, ownerId, ownerEnt, capacity, originalMass, emptyMass, nerfed)
     ent:SetNWBool("DeliveryIsTanker", true)
     ent:SetNWString("DeliveryTankerOwnerID", ownerId or "")
     ent:SetNWEntity("DeliveryTankerOwner", ownerEnt or NULL)
@@ -115,6 +117,7 @@ local function ApplyTankerMetadata(ent, ownerId, ownerEnt, capacity, originalMas
     ent:SetNWFloat("DeliveryTankerOriginalMass", originalMass)
     ent:SetNWFloat("DeliveryTankerEmptyMass", emptyMass)
     ent:SetNWBool("DeliveryTankerBusy", false)
+    ent:SetNWBool("DeliveryTankerNerfed", nerfed and true or false)
     ent:SetNWString("DeliveryTankerLiquidKey", "")
     ent:SetNWFloat("DeliveryTankerLiquidLitersFloat", 0)
     ent:SetNWInt("DeliveryTankerLiquidLiters", 0)
@@ -126,6 +129,7 @@ duplicator.RegisterEntityModifier("delivery_tanker", function(ply, ent, data)
     local capacity = Delivery_ClampTankerCapacity(data and data.capacityLiters)
     local originalMass = tonumber(data and data.originalMassKg) or 50
     local emptyMass = Delivery_GetTankerEmptyMass(capacity)
+    local nerfed = data and data.nerfed and true or false
 
     ApplyTankerMetadata(
         ent,
@@ -133,7 +137,8 @@ duplicator.RegisterEntityModifier("delivery_tanker", function(ply, ent, data)
         IsValid(ply) and ply or NULL,
         capacity,
         originalMass,
-        emptyMass
+        emptyMass,
+        nerfed
     )
 
     SetPropMass(ent, emptyMass)
@@ -245,7 +250,13 @@ local function FinishDrainTransfer(transfer)
         return
     end
 
-    ply:addMoney(transfer.price)
+    local price = transfer.price
+    local nerfed = IsValid(transfer.tanker) and transfer.tanker:GetNWBool("DeliveryTankerNerfed", false)
+    if nerfed then
+        price = math.floor(price * 0.5)
+    end
+
+    ply:addMoney(price)
 
     local soldCargoData = transfer.cargo
     if soldCargoData and soldCargoData.produces then
@@ -269,7 +280,7 @@ local function FinishDrainTransfer(transfer)
         end
     end
 
-    StopTankerTransfer(ply, "Sold " .. (transfer.cargo.label or transfer.cargoKey) .. " for $" .. transfer.price .. ".")
+    StopTankerTransfer(ply, "Sold " .. (transfer.cargo.label or transfer.cargoKey) .. " for $" .. price .. (nerfed and " (NERFED, -50%)" or "") .. ".")
 end
 
 function Delivery_StartTankerTransfer(ply, npcPos, cargoKey, mode, price, overrideLiters)
@@ -386,7 +397,7 @@ hook.Add("PlayerDisconnected", "Delivery_StopTankerTransferOnLeave", function(pl
     StopTankerTransfer(ply)
 end)
 
-function Delivery_MarkTankerProp(ply, ent, capacityLiters)
+function Delivery_MarkTankerProp(ply, ent, capacityLiters, nerfed)
     if not IsValid(ply) or not IsSupportedTankerClass(ent) then
         return false, "Look at a valid physics prop."
     end
@@ -411,13 +422,18 @@ function Delivery_MarkTankerProp(ply, ent, capacityLiters)
     local capacity = Delivery_ClampTankerCapacity(capacityLiters)
     local originalMass = phys:GetMass()
     local emptyMass = Delivery_GetTankerEmptyMass(capacity)
+    nerfed = nerfed and true or false
 
-    ApplyTankerMetadata(ent, ply:SteamID64() or "", ply, capacity, originalMass, emptyMass)
+    ApplyTankerMetadata(ent, ply:SteamID64() or "", ply, capacity, originalMass, emptyMass, nerfed)
 
     StoreTankerModifier(ent)
     SetPropMass(ent, emptyMass)
 
-    return true, string.format("Marked tanker at %s L capacity.", Delivery_FormatLiters(capacity))
+    return true, string.format(
+        "Marked tanker at %s L capacity.%s",
+        Delivery_FormatLiters(capacity),
+        nerfed and " (NERFED: weight will not change and sell price is halved)" or ""
+    )
 end
 
 function Delivery_UnmarkTankerProp(ply, ent)
@@ -443,6 +459,7 @@ function Delivery_UnmarkTankerProp(ply, ent)
     ent:SetNWFloat("DeliveryTankerOriginalMass", 0)
     ent:SetNWFloat("DeliveryTankerEmptyMass", 0)
     ent:SetNWBool("DeliveryTankerBusy", false)
+    ent:SetNWBool("DeliveryTankerNerfed", false)
     ent:SetNWString("DeliveryTankerLiquidKey", "")
     ent:SetNWFloat("DeliveryTankerLiquidLitersFloat", 0)
     ent:SetNWInt("DeliveryTankerLiquidLiters", 0)
